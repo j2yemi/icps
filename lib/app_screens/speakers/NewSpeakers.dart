@@ -12,9 +12,9 @@ import 'package:icps/app_screens/popupMenu/Settings.dart';
 import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:icps/app_screens/activity_feed/NewFeed.dart';
-import 'dart:io';
+//import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
+//import 'package:dio/dio.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 
@@ -265,11 +265,12 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                     ),
                                   ),
                                   new Container(
-                                    padding: new EdgeInsets.only(top: 10.0),
+                                    padding: new EdgeInsets.only(top: 10.0, left: 9.0, right: 9.0),
                                     child: new Column(
+                                      crossAxisAlignment:  CrossAxisAlignment.start,
                                       children: <Widget>[
                                         new Container(
-                                          padding: new EdgeInsets.only(bottom: 5.0),
+                                          padding: new EdgeInsets.only(bottom: 9.0),
                                           child: new Text(snapshot.data[index].title + ' ' +
                                                           snapshot.data[index].surname + ' ' +
                                                           snapshot.data[index].firstname,
@@ -279,20 +280,46 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                           ),
                                         ),
                                         new Container(
-                                            padding: new EdgeInsets.only(bottom: 3.0),
+                                            padding: new EdgeInsets.only(bottom: 6.0),
                                           child: new Text('${snapshot.data[index].workPosition}, ${snapshot.data[index].organisation}')
                                         ),
                                         snapshot.data[index].facebookId == null ?
                                         new Container() :
                                         new Container(
                                           padding: new EdgeInsets.only(bottom: 3.0),
-                                          child: new Text('${snapshot.data[index].facebookId}'),
+                                          child: new Row(
+                                            children: <Widget>[
+                                              new Container(
+                                                padding: new EdgeInsets.only(right: 3.0),
+                                                child: new Icon(
+                                                  FontAwesomeIcons.facebook,
+                                                  size: 15.0,
+                                                ),
+                                              ),
+                                              new Container(
+                                                child: new Text('${snapshot.data[index].facebookId}'),
+                                              )
+                                            ],
+                                          )
                                         ),
                                         snapshot.data[index].twitterId == null ?
                                         new Container() :
                                         new Container(
                                           padding: new EdgeInsets.only(bottom: 3.0),
-                                          child: new Text('${snapshot.data[index].twitterId}'),
+                                          child: new Row(
+                                            children: <Widget>[
+                                              new Container(
+                                                padding: new EdgeInsets.only(right: 3.0),
+                                                child: new Icon(
+                                                    FontAwesomeIcons.twitter,
+                                                  size: 15.0,
+                                                ),
+                                              ),
+                                              new Container(
+                                                child: new Text('${snapshot.data[index].twitterId}'),
+                                              )
+                                            ],
+                                          )
                                         ),
 //                                        new Container(
 //                                          padding: new EdgeInsets.only(bottom: 3.0),

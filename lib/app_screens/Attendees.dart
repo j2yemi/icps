@@ -11,7 +11,7 @@ import 'package:icps/app_screens/popupMenu/Settings.dart';
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:icps/UsersInfo.dart';
+//import 'package:icps/UsersInfo.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:icps/app_screens/activity_feed/NewFeed.dart';
 import 'dart:io';
@@ -601,208 +601,380 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new Container(
-                decoration: new BoxDecoration(
-                  image: new DecorationImage(image: new AssetImage('assets/images/splash/SplashBg.jpg'),
-                    fit: BoxFit.cover,
-                  ),
+              new Stack(
+                children: <Widget>[
+                  new Container(
+                    child: new Column(
+                      children: <Widget>[
+                        widget.joinAttendee.usersInfo.picId == null ?
+                        new Container(
+                          decoration: new BoxDecoration(
+                            image: new DecorationImage(image: new AssetImage('assets/images/splash/SplashBg.jpg'),
+                              fit: BoxFit.cover,
+                            ),
 //                  color: Color.fromRGBO(180, 188, 151, 0.8),
-                ),
-                child: new Container(
-                  padding: new EdgeInsets.only(top: 50.0, bottom: 50.0),
-                  color: Color.fromRGBO(180, 188, 151, 0.8),
-                  child: new Center(
-                    child: widget.joinAttendee.usersInfo.picId == null
-                        ? new CircleAvatar(
-                      radius: 50.0,
-                      child: new Text('${widget.joinAttendee.usersInfo.surname.substring(0, 1)}'
-                          '${widget.joinAttendee.usersInfo.firstname.substring(0, 1)}',
-                        style: new TextStyle(
-                            fontSize: 43.0
+                          ),
+                          child: new Container(
+                            padding: new EdgeInsets.only(top: 50.0, bottom: 50.0),
+                            color: Color.fromRGBO(180, 188, 151, 0.8),
+                            child: new Center(
+                                child: new CircleAvatar(
+                                  radius: 50.0,
+                                  child: new Text('${widget.joinAttendee.usersInfo.surname.substring(0, 1)}'
+                                      '${widget.joinAttendee.usersInfo.firstname.substring(0, 1)}',
+                                    style: new TextStyle(
+                                        fontSize: 43.0
+                                    ),
+                                  ),
+                                )
+//                        : CircleAvatar(
+//                      radius: 50.0,
+//                      backgroundImage: NetworkImage(url + widget.joinAttendee.usersInfo.pic_id),
+//                      backgroundColor: Colors.transparent,
+//                    ),
+                            ),
+                          ),
+                        ) :
+                        new Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: ScreenUtil.getInstance().setHeight(735),
+                          decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                image: new NetworkImage(url + widget.joinAttendee.usersInfo.picId),
+                                fit: BoxFit.cover,
+                              ),
+                              borderRadius: BorderRadius.vertical(bottom: Radius.circular(50.0))
+//                  color: Color.fromRGBO(180, 188, 151, 0.8),
+                          ),
                         ),
-                      ),
-                    )
-                        : CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage: NetworkImage(url + widget.joinAttendee.usersInfo.picId),
-                      backgroundColor: Colors.transparent,
+                        new SizedBox(
+                          height: ScreenUtil.getInstance().setHeight(435),
+                        )
+                      ],
                     ),
                   ),
-                ),
-              ),
-              new Center (
-                  child: new Container(
-                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              bottom: new BorderSide(
-                                width: 1.0,
-                                style: BorderStyle.solid,
-                                color: Color.fromRGBO(192, 192, 192, 1),
-                              )
-                          )
+                  new Positioned(
+                    top: 220.0,
+                    left: 20.0,
+                    child: new Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
-                              child: new Icon(
-                                  Icons.person
-                              )
-                          ),
-                          new Container(
-                            child: new Text('${widget.joinAttendee.usersInfo.title} ${widget.joinAttendee.usersInfo.surname} ${widget.joinAttendee.usersInfo.firstname}',
-                              style: new TextStyle(
-                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(36)
+                      child: new Container(
+                        padding: new EdgeInsets.all(25.0),
+                        width: ScreenUtil.getInstance().setWidth(680),
+//                        decoration: new BoxDecoration(
+//                          color: Colors.white,
+//                          borderRadius: new BorderRadius.circular(20.0),
+//                        ),
+                        child: new Column(
+                          children: <Widget>[
+                            new Container(
+                              child: new Text('${widget.joinAttendee.usersInfo.title} ${widget.joinAttendee.usersInfo.surname} ${widget.joinAttendee.usersInfo.firstname}',
+                                style: new TextStyle(
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(46),
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
-                          )
-                        ],
-                      )
-                  )
-              ),
-              new Center (
-                  child: new Container(
-                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              bottom: new BorderSide(
-                                width: 1.0,
-                                style: BorderStyle.solid,
-                                color: Color.fromRGBO(192, 192, 192, 1),
-                              )
-                          )
-                      ),
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
-                              child: new Icon(
-                                  Icons.business_center
-                              )
-                          ),
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(550),
-                            child: new Text('${widget.joinAttendee.usersInfo.workPosition}, ${widget.joinAttendee.usersInfo.organisation}',
-                              style: new TextStyle(
-                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(36)
+                            widget.joinAttendee.usersInfo.shortProfile == null ?
+                            new Center() :
+                            new Container(
+                              padding: new EdgeInsets.only(top: 18.0, bottom: 15.0),
+                              width: ScreenUtil.getInstance().setWidth(550),
+                              child: new Text('${widget.joinAttendee.usersInfo.shortProfile}',
+                                style: new TextStyle(
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
+                                    color: Colors.grey
+                                ),
                               ),
                             ),
-                          )
-                        ],
-                      )
-                  )
-              ),
-              widget.joinAttendee.usersInfo.facebookId == null ?
-              new Center() :
-              new Center (
-                  child: new Container(
-                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              bottom: new BorderSide(
-                                width: 1.0,
-                                style: BorderStyle.solid,
-                                color: Color.fromRGBO(192, 192, 192, 1),
-                              )
-                          )
-                      ),
-                      child: new Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Container(
-                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
-                              child: new Icon(
-                                  FontAwesomeIcons.facebook
-                              )
-                          ),
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(550),
-                            child: new Text('${widget.joinAttendee.usersInfo.facebookId}',
-                              style: new TextStyle(
-                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(31)
-                              ),
+                            new Center (
+                                child: new Container(
+//                                  padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+                                    width: MediaQuery.of(context).size.width,
+//                                  decoration: new BoxDecoration(
+//                                      border: new Border(
+//                                          bottom: new BorderSide(
+//                                            width: 1.0,
+//                                            style: BorderStyle.solid,
+//                                            color: Color.fromRGBO(192, 192, 192, 1),
+//                                          )
+//                                      )
+//                                  ),
+                                    child: new Row(
+//                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        new Container(
+                                            padding: new EdgeInsets.only(left: 9.0, right: 10.0),
+                                            child: new Icon(
+                                                Icons.business_center
+                                            )
+                                        ),
+                                        new Container(
+                                          width: ScreenUtil.getInstance().setWidth(500),
+                                          child: new Text('${widget.joinAttendee.usersInfo.workPosition}, ${widget.joinAttendee.usersInfo.organisation}',
+                                            style: new TextStyle(
+                                                fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                )
                             ),
-                          )
-                        ],
-                      )
-                  )
-              ),
-              widget.joinAttendee.usersInfo.twitterId == null ?
-              new Center() :
-              new Center (
-                  child: new Container(
-                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              bottom: new BorderSide(
-                                width: 1.0,
-                                style: BorderStyle.solid,
-                                color: Color.fromRGBO(192, 192, 192, 1),
-                              )
-                          )
-                      ),
-                      child: new Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Container(
-                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
-                              child: new Icon(
-                                  FontAwesomeIcons.twitter
-                              )
-                          ),
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(550),
-                            child: new Text('${widget.joinAttendee.usersInfo.twitterId}',
-                              style: new TextStyle(
-                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(31)
-                              ),
+                            widget.joinAttendee.usersInfo.facebookId == null ?
+                            new Center() :
+                            new Center (
+                                child: new Container(
+                                    padding: new EdgeInsets.only(top: 10.0, bottom: 10.0),
+                                    width: MediaQuery.of(context).size.width,
+//                                    decoration: new BoxDecoration(
+//                                        border: new Border(
+//                                            bottom: new BorderSide(
+//                                              width: 1.0,
+//                                              style: BorderStyle.solid,
+//                                              color: Color.fromRGBO(192, 192, 192, 1),
+//                                            )
+//                                        )
+//                                    ),
+                                    child: new Row(
+//                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        new Container(
+                                            padding: new EdgeInsets.only(left: 9.0, right: 10.0),
+                                            child: new Icon(
+                                                FontAwesomeIcons.facebook
+                                            )
+                                        ),
+                                        new Container(
+                                          width: ScreenUtil.getInstance().setWidth(500),
+                                          child: new Text('${widget.joinAttendee.usersInfo.facebookId}',
+                                            style: new TextStyle(
+                                                fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                )
                             ),
-                          )
-                        ],
-                      )
-                  )
-              ),
-              widget.joinAttendee.usersInfo.shortProfile == null ?
-              new Center() :
-              new Center (
-                  child: new Container(
-                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: new BoxDecoration(
-                          border: new Border(
-                              bottom: new BorderSide(
-                                width: 1.0,
-                                style: BorderStyle.solid,
-                                color: Color.fromRGBO(192, 192, 192, 1),
-                              )
-                          )
-                      ),
-                      child: new Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Container(
-                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
-                              child: new Icon(
-                                  Icons.person_pin
-                              )
-                          ),
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(550),
-                            child: new Text('${widget.joinAttendee.usersInfo.shortProfile}',
-                              style: new TextStyle(
-                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(32)
-                              ),
+                            widget.joinAttendee.usersInfo.twitterId == null ?
+                            new Center() :
+                            new Center (
+                                child: new Container(
+//                                    padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+                                    width: MediaQuery.of(context).size.width,
+//                                    decoration: new BoxDecoration(
+//                                        border: new Border(
+//                                            bottom: new BorderSide(
+//                                              width: 1.0,
+//                                              style: BorderStyle.solid,
+//                                              color: Color.fromRGBO(192, 192, 192, 1),
+//                                            )
+//                                        )
+//                                    ),
+                                    child: new Row(
+//                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        new Container(
+                                            padding: new EdgeInsets.only(left: 9.0, right: 10.0),
+                                            child: new Icon(
+                                                FontAwesomeIcons.twitter
+                                            )
+                                        ),
+                                        new Container(
+                                          width: ScreenUtil.getInstance().setWidth(500),
+                                          child: new Text('${widget.joinAttendee.usersInfo.twitterId}',
+                                            style: new TextStyle(
+                                                fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                )
                             ),
-                          )
-                        ],
-                      )
-                  )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+//              new Center (
+//                  child: new Container(
+//                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+//                      width: MediaQuery.of(context).size.width,
+//                      decoration: new BoxDecoration(
+//                          border: new Border(
+//                              bottom: new BorderSide(
+//                                width: 1.0,
+//                                style: BorderStyle.solid,
+//                                color: Color.fromRGBO(192, 192, 192, 1),
+//                              )
+//                          )
+//                      ),
+//                      child: new Row(
+//                        children: <Widget>[
+//                          new Container(
+//                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
+//                              child: new Icon(
+//                                  Icons.person
+//                              )
+//                          ),
+//                          new Container(
+//                            child: new Text('${widget.joinAttendee.usersInfo.title} ${widget.joinAttendee.usersInfo.surname} ${widget.joinAttendee.usersInfo.firstname}',
+//                              style: new TextStyle(
+//                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(36)
+//                              ),
+//                            ),
+//                          )
+//                        ],
+//                      )
+//                  )
+//              ),
+//              new Center (
+//                  child: new Container(
+//                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+//                      width: MediaQuery.of(context).size.width,
+//                      decoration: new BoxDecoration(
+//                          border: new Border(
+//                              bottom: new BorderSide(
+//                                width: 1.0,
+//                                style: BorderStyle.solid,
+//                                color: Color.fromRGBO(192, 192, 192, 1),
+//                              )
+//                          )
+//                      ),
+//                      child: new Row(
+//                        children: <Widget>[
+//                          new Container(
+//                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
+//                              child: new Icon(
+//                                  Icons.business_center
+//                              )
+//                          ),
+//                          new Container(
+//                            width: ScreenUtil.getInstance().setWidth(550),
+//                            child: new Text('${widget.joinAttendee.usersInfo.workPosition}, ${widget.joinAttendee.usersInfo.organisation}',
+//                              style: new TextStyle(
+//                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(36)
+//                              ),
+//                            ),
+//                          )
+//                        ],
+//                      )
+//                  )
+//              ),
+//              widget.joinAttendee.usersInfo.facebookId == null ?
+//              new Center() :
+//              new Center (
+//                  child: new Container(
+//                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+//                      width: MediaQuery.of(context).size.width,
+//                      decoration: new BoxDecoration(
+//                          border: new Border(
+//                              bottom: new BorderSide(
+//                                width: 1.0,
+//                                style: BorderStyle.solid,
+//                                color: Color.fromRGBO(192, 192, 192, 1),
+//                              )
+//                          )
+//                      ),
+//                      child: new Row(
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+//                        children: <Widget>[
+//                          new Container(
+//                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
+//                              child: new Icon(
+//                                  FontAwesomeIcons.facebook
+//                              )
+//                          ),
+//                          new Container(
+//                            width: ScreenUtil.getInstance().setWidth(550),
+//                            child: new Text('${widget.joinAttendee.usersInfo.facebookId}',
+//                              style: new TextStyle(
+//                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(31)
+//                              ),
+//                            ),
+//                          )
+//                        ],
+//                      )
+//                  )
+//              ),
+//              widget.joinAttendee.usersInfo.twitterId == null ?
+//              new Center() :
+//              new Center (
+//                  child: new Container(
+//                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+//                      width: MediaQuery.of(context).size.width,
+//                      decoration: new BoxDecoration(
+//                          border: new Border(
+//                              bottom: new BorderSide(
+//                                width: 1.0,
+//                                style: BorderStyle.solid,
+//                                color: Color.fromRGBO(192, 192, 192, 1),
+//                              )
+//                          )
+//                      ),
+//                      child: new Row(
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+//                        children: <Widget>[
+//                          new Container(
+//                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
+//                              child: new Icon(
+//                                  FontAwesomeIcons.twitter
+//                              )
+//                          ),
+//                          new Container(
+//                            width: ScreenUtil.getInstance().setWidth(550),
+//                            child: new Text('${widget.joinAttendee.usersInfo.twitterId}',
+//                              style: new TextStyle(
+//                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(31)
+//                              ),
+//                            ),
+//                          )
+//                        ],
+//                      )
+//                  )
+//              ),
+//              widget.joinAttendee.usersInfo.shortProfile == null ?
+//              new Center() :
+//              new Center (
+//                  child: new Container(
+//                      padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
+//                      width: MediaQuery.of(context).size.width,
+//                      decoration: new BoxDecoration(
+//                          border: new Border(
+//                              bottom: new BorderSide(
+//                                width: 1.0,
+//                                style: BorderStyle.solid,
+//                                color: Color.fromRGBO(192, 192, 192, 1),
+//                              )
+//                          )
+//                      ),
+//                      child: new Row(
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+//                        children: <Widget>[
+//                          new Container(
+//                              padding: new EdgeInsets.only(left: 30.0, right: 30.0),
+//                              child: new Icon(
+//                                  Icons.person_pin
+//                              )
+//                          ),
+//                          new Container(
+//                            width: ScreenUtil.getInstance().setWidth(550),
+//                            child: new Text('${widget.joinAttendee.usersInfo.shortProfile}',
+//                              style: new TextStyle(
+//                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(32)
+//                              ),
+//                            ),
+//                          )
+//                        ],
+//                      )
+//                  )
+//              ),
             ],
           ),
         ),

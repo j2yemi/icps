@@ -1,4 +1,4 @@
-import 'package:date_format/date_format.dart';
+//import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:icps/Constants.dart';
@@ -29,7 +29,7 @@ import 'package:icps/app_screens/Attendees.dart';
 import 'package:icps/app_screens/Conference.dart';
 //import 'package:icps/app_screens/ConferenceSurvey.dart';
 //import 'package:icps/app_screens/Partners.dart';
-import 'package:icps/app_screens/Gallery.dart';
+//import 'package:icps/app_screens/Gallery.dart';
 import 'package:icps/app_screens/Faq.dart';
 import 'package:icps/app_screens/ExtraActivities.dart';
 import 'package:icps/app_screens/conference/ConferencePaper.dart';
@@ -383,57 +383,64 @@ class _HomePageState extends State<HomePage> {
 //                          },
 //                        ),
 
-            ],
-          ),
-        );
+          ],
+        ),
+      );
       case AuthStatus.signedIn:
         return new Drawer(
-          child: new ListView(
-            children: <Widget>[
-              new DrawerHeader(
-                  decoration: new BoxDecoration(
-                      color: Color.fromRGBO(0, 0, 0, 0.8)
+          child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Expanded(
+                  child: new ListView(
+                  children: <Widget>[
+                    new Container(
+                        width: MediaQuery.of(context).size.width,
+                      child: new DrawerHeader(
+                        decoration: new BoxDecoration(
+                            color: Color.fromRGBO(0, 0, 0, 0.8)
+                        ),
+                        child: new GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
+                            );
+                          },
+                          child: new Container (
+                            child: new Column(
+                              children: <Widget>[
+                                user.picId == null
+                                    ? new CircleAvatar(
+                                  radius: 50.0,
+                                  child: new Text('${user.surname.substring(0, 1)}'
+                                      '${user.firstname.substring(0, 1)}',
+                                    style: new TextStyle(
+                                        fontSize: 43.0
+                                    ),
+                                  ),
+                                )
+                                    : CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundImage: NetworkImage(url + user.picId),
+                                  backgroundColor: Colors.transparent,
+                                ),
+                                new Container(
+                                  padding: new EdgeInsets.only(top: 10.0),
+                                  child: new Text(user.surname + ' ' + user.firstname,
+                                    style: new TextStyle(
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        )
+                    ),
                   ),
-                  child: new GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
-                      );
-                    },
-                    child: new Container (
-                      child: new Column(
-                        children: <Widget>[
-                          user.picId == null
-                              ? new CircleAvatar(
-                            radius: 50.0,
-                            child: new Text('${user.surname.substring(0, 1)}'
-                                '${user.firstname.substring(0, 1)}',
-                              style: new TextStyle(
-                                  fontSize: 43.0
-                              ),
-                            ),
-                          )
-                              : CircleAvatar(
-                            radius: 50.0,
-                            backgroundImage: NetworkImage(url + user.picId),
-                            backgroundColor: Colors.transparent,
-                          ),
-                          new Container(
-                            padding: new EdgeInsets.only(top: 10.0),
-                            child: new Text(user.surname + ' ' + user.firstname,
-                              style: new TextStyle(
-                                  color: Colors.white
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  )
-              ),
-              new Container(
-                  child: new Column(
-                      children: <Widget> [
+                    new Container(
+                        child: new Column(
+                            children: <Widget> [
 //                        new ListTile(
 //                          leading: Builder(
 //                              builder: (context) => Icon(Icons.person)
@@ -448,34 +455,34 @@ class _HomePageState extends State<HomePage> {
 //                            );
 //                          },
 //                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.add_photo_alternate)
-                          ),
-                          title: new Text('Photo Speak'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new PhotoSpeak(data: widget.data,)
-                                )
-                            );
-                          },
-                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.people)
-                          ),
-                          title: new Text('Attendees'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new Attendees(data: widget.data,)
-                                )
-                            );
-                          },
-                        ),
+                              new ListTile(
+                                leading: Builder(
+                                    builder: (context) => Icon(Icons.add_photo_alternate)
+                                ),
+                                title: new Text('Photo Speak'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => new PhotoSpeak(data: widget.data,)
+                                      )
+                                  );
+                                },
+                              ),
+                              new ListTile(
+                                leading: Builder(
+                                    builder: (context) => Icon(Icons.people)
+                                ),
+                                title: new Text('Attendees'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => new Attendees(data: widget.data,)
+                                      )
+                                  );
+                                },
+                              ),
 //                        new ListTile(
 //                          leading: Builder(
 //                              builder: (context) => Icon(Icons.photo)
@@ -490,34 +497,34 @@ class _HomePageState extends State<HomePage> {
 //                            );
 //                          },
 //                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.sentiment_satisfied)
-                          ),
-                          title: new Text('Extra Activities'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new ExtraActivities(data: widget.data)
-                                )
-                            );
-                          },
-                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.slideshow)
-                          ),
-                          title: new Text('Papers/Publications'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new ConferencePaper()
-                                )
-                            );
-                          },
-                        ),
+                              new ListTile(
+                                leading: Builder(
+                                    builder: (context) => Icon(Icons.sentiment_satisfied)
+                                ),
+                                title: new Text('Extra Activities'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => new ExtraActivities(data: widget.data)
+                                      )
+                                  );
+                                },
+                              ),
+                              new ListTile(
+                                leading: Builder(
+                                    builder: (context) => Icon(Icons.slideshow)
+                                ),
+                                title: new Text('Papers/Publications'),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => new ConferencePaper()
+                                      )
+                                  );
+                                },
+                              ),
 //                        new ListTile(
 //                          leading: Builder(
 //                              builder: (context) => Icon(Icons.message)
@@ -560,105 +567,118 @@ class _HomePageState extends State<HomePage> {
 //                            );
 //                          },
 //                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.exit_to_app)
-                          ),
-                          title: new Text('Log out'),
-                          onTap: () {
-                            setState(() {
-                              _authStatus = AuthStatus.notSignedIn;
-                            });
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => HomePage())
-                            );
-                          },
-                        ),
-                        new Container(
-                          child: new Align(
-                            alignment: FractionalOffset.bottomCenter,
-                            child: new Column(
-                              children: <Widget>[
-                                Divider(),
-                                new Container(
-                                  padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 10.0),
-                                  child: new Row(
-                                    children: <Widget>[
-                                      new Container(
-                                        child: new Text('Technology: ',
-                                          style: new TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        child: new Text('Java, DevOps',
-                                            style: new TextStyle(
-                                              color: Colors.grey,
-                                            )
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              new ListTile(
+                                leading: Builder(
+                                    builder: (context) => Icon(Icons.exit_to_app)
                                 ),
-                                new Container(
-                                  padding: new EdgeInsets.only(left: 44.0, bottom: 10.0),
-                                  child: new Row(
-                                    children: <Widget>[
-                                      new Container(
-                                        child: new Text('Credits: ',
-                                          style: new TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        child: new Text('Central Bank of Nigeria',
-                                            style: new TextStyle(
-                                                color: Colors.grey
-                                            )
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                new Container(
-                                    child: new FlatButton(
-                                      child: new Text('Developed by Centrifuge Group',
-                                          style: new TextStyle(
-                                              color: Colors.grey
-                                          )
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            new MaterialPageRoute(
-                                                builder: (context) => new Centrifuge(data: widget.data,)
-                                            )
-                                        );
-                                      },
-                                    )
-                                ),
-                              ],
+                                title: new Text('Log out'),
+                                onTap: () {
+                                  setState(() {
+                                    _authStatus = AuthStatus.notSignedIn;
+                                  });
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => HomePage())
+                                  );
+                                },
+                              ),
+                            ]
+                        )
+                    )
+                ]
+              )
+            ),
+            new Container(
+              child: new Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: new Column(
+                  children: <Widget>[
+                    Divider(),
+                    new Container(
+                      padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Text('Technology: ',
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey
+                              ),
                             ),
                           ),
-                        ),
-                      ]
-                  )
-              )
-            ],
-          ),
-        );
+                          new Container(
+                            child: new Text('Java, DevOps',
+                                style: new TextStyle(
+                                  color: Colors.grey,
+                                )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Container(
+                      padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Text('Credits: ',
+                              style: new TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey
+                              ),
+                            ),
+                          ),
+                          new Container(
+                            child: new Text('Central Bank of Nigeria',
+                                style: new TextStyle(
+                                    color: Colors.grey
+                                )
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    new Container(
+                      padding: new EdgeInsets.only(left: 29.0),
+                      child: new Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: new FlatButton(
+                            child: new Text('Developed by Centrifuge Group',
+                                style: new TextStyle(
+                                    color: Colors.grey
+                                )
+                            ),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new Centrifuge(data: widget.data,)
+                                  )
+                              );
+                            },
+                          )
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ]
+        )
+      );
       case AuthStatus.signedInSpeaker:
         return new Drawer(
-          child: new ListView(
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new DrawerHeader(
-                  decoration: new BoxDecoration(
-                      color: Color.fromRGBO(0, 0, 0, 0.8)
-                  ),
-                  child: new GestureDetector(
+              new Expanded(
+                child: new ListView(
+                children: <Widget>[
+                  new Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: new DrawerHeader(
+                    decoration: new BoxDecoration(
+                        color: Color.fromRGBO(0, 0, 0, 0.8)
+                    ),
+                    child: new GestureDetector(
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
@@ -693,11 +713,12 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       )
-                  )
-              ),
-              new Container(
-                  child: new Column(
-                      children: <Widget> [
+                    )
+                  ),
+                ),
+                new Container(
+                    child: new Column(
+                        children: <Widget> [
 //                        new ListTile(
 //                          leading: Builder(
 //                              builder: (context) => Icon(Icons.person)
@@ -712,34 +733,34 @@ class _HomePageState extends State<HomePage> {
 //                            );
 //                          },
 //                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.add_photo_alternate)
+                          new ListTile(
+                            leading: Builder(
+                                builder: (context) => Icon(Icons.add_photo_alternate)
+                            ),
+                            title: new Text('Photo Speak'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new PhotoSpeak(data: widget.data,)
+                                  )
+                              );
+                            },
                           ),
-                          title: new Text('Photo Speak'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new PhotoSpeak(data: widget.data,)
-                                )
-                            );
-                          },
-                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.people)
+                          new ListTile(
+                            leading: Builder(
+                                builder: (context) => Icon(Icons.people)
+                            ),
+                            title: new Text('Attendees'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new Attendees(data: widget.data,)
+                                  )
+                              );
+                            },
                           ),
-                          title: new Text('Attendees'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new Attendees(data: widget.data,)
-                                )
-                            );
-                          },
-                        ),
 //                        new ListTile(
 //                          leading: Builder(
 //                              builder: (context) => Icon(Icons.photo)
@@ -754,34 +775,34 @@ class _HomePageState extends State<HomePage> {
 //                            );
 //                          },
 //                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.sentiment_satisfied)
+                          new ListTile(
+                            leading: Builder(
+                                builder: (context) => Icon(Icons.sentiment_satisfied)
+                            ),
+                            title: new Text('Extra Activities'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new ExtraActivities(data: widget.data)
+                                  )
+                              );
+                            },
                           ),
-                          title: new Text('Extra Activities'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new ExtraActivities(data: widget.data)
-                                )
-                            );
-                          },
-                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.slideshow)
+                          new ListTile(
+                            leading: Builder(
+                                builder: (context) => Icon(Icons.slideshow)
+                            ),
+                            title: new Text('Papers/Publications'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new ConferencePaper()
+                                  )
+                              );
+                            },
                           ),
-                          title: new Text('Papers/Publications'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new ConferencePaper()
-                                )
-                            );
-                          },
-                        ),
 //                        new ListTile(
 //                          leading: Builder(
 //                              builder: (context) => Icon(Icons.message)
@@ -824,110 +845,117 @@ class _HomePageState extends State<HomePage> {
 //                            );
 //                          },
 //                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.slideshow)
-                          ),
-                          title: new Text('Upload Presentation'),
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.push(context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new UploadPresentation(widget.data)
-                                )
-                            );
-                          },
-                        ),
-                        new ListTile(
-                          leading: Builder(
-                              builder: (context) => Icon(Icons.exit_to_app)
-                          ),
-                          title: new Text('Log out'),
-                          onTap: () {
-                            setState(() {
-                              _authStatus = AuthStatus.notSignedIn;
-                            });
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => HomePage())
-                            );
-                          },
-                        ),
-                        new Container(
-                          child: new Align(
-                            alignment: FractionalOffset.bottomCenter,
-                            child: new Column(
-                              children: <Widget>[
-                                Divider(),
-                                new Container(
-                                  padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 10.0),
-                                  child: new Row(
-                                    children: <Widget>[
-                                      new Container(
-                                        child: new Text('Technology: ',
-                                          style: new TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        child: new Text('Java, DevOps',
-                                            style: new TextStyle(
-                                              color: Colors.grey,
-                                            )
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                new Container(
-                                  padding: new EdgeInsets.only(left: 44.0, bottom: 10.0),
-                                  child: new Row(
-                                    children: <Widget>[
-                                      new Container(
-                                        child: new Text('Credits: ',
-                                          style: new TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey
-                                          ),
-                                        ),
-                                      ),
-                                      new Container(
-                                        child: new Text('Central Bank of Nigeria',
-                                            style: new TextStyle(
-                                                color: Colors.grey
-                                            )
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                new Container(
-                                    child: new FlatButton(
-                                      child: new Text('Developed by Centrifuge Group',
-                                          style: new TextStyle(
-                                              color: Colors.grey
-                                          )
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            new MaterialPageRoute(
-                                                builder: (context) => new Centrifuge(data: widget.data,)
-                                            )
-                                        );
-                                      },
-                                    )
-                                ),
-                              ],
+                          new ListTile(
+                            leading: Builder(
+                                builder: (context) => Icon(Icons.slideshow)
                             ),
+                            title: new Text('Upload Presentation'),
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new UploadPresentation(widget.data)
+                                  )
+                              );
+                            },
                           ),
-                        ),
-                      ]
-                  )
+                          new ListTile(
+                            leading: Builder(
+                                builder: (context) => Icon(Icons.exit_to_app)
+                            ),
+                            title: new Text('Log out'),
+                            onTap: () {
+                              setState(() {
+                                _authStatus = AuthStatus.notSignedIn;
+                              });
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => HomePage())
+                              );
+                            },
+                          ),
+                        ]
+                      )
+                    ),
+                  ]
+                )
               ),
-            ],
-          ),
-        );
+              new Container(
+                child: new Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: new Column(
+                    children: <Widget>[
+                      Divider(),
+                      new Container(
+                        padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Container(
+                              child: new Text('Technology: ',
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                            ),
+                            new Container(
+                              child: new Text('Java, DevOps',
+                                  style: new TextStyle(
+                                    color: Colors.grey,
+                                  )
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      new Container(
+                        padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
+                        child: new Row(
+                          children: <Widget>[
+                            new Container(
+                              child: new Text('Credits: ',
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey
+                                ),
+                              ),
+                            ),
+                            new Container(
+                              child: new Text('Central Bank of Nigeria',
+                                  style: new TextStyle(
+                                      color: Colors.grey
+                                  )
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      new Container(
+                        padding: new EdgeInsets.only(left: 29.0),
+                        child: new Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: new FlatButton(
+                              child: new Text('Developed by Centrifuge Group',
+                                  style: new TextStyle(
+                                      color: Colors.grey
+                                  )
+                              ),
+                              onPressed: () {
+                                Navigator.push(context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Centrifuge(data: widget.data,)
+                                    )
+                                );
+                              },
+                            )
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
+      );
     }
   }
 
@@ -965,293 +993,297 @@ class _HomePageState extends State<HomePage> {
           child: new SingleChildScrollView(
             child: new Column (
               children: <Widget>[
-                Padding (padding: EdgeInsets.only(top: 42.0)),
-                new Row (
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    new GestureDetector (
-                      onTap: () {
-                        Navigator.push (context,
-                            MaterialPageRoute(builder: (context) => Agenda())
-                        );
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                              image: new DecorationImage(
-                                  image: new AssetImage(
-                                   'assets/images/icons/calendarTwo.png'
-                                  )
-                              )
+//                new Expanded(
+//                  child: new SizedBox(
+//                    child: new Column(
+//                      children: <Widget>[
+                        Padding (padding: EdgeInsets.only(top: 42.0)),
+                        new Row (
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            new GestureDetector (
+                              onTap: () {
+                                Navigator.push (context,
+                                    MaterialPageRoute(builder: (context) => Agenda())
+                                );
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/calendarTwo.png'
+                                            )
+                                        )
 
-                            ),
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.event_available ),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Agenda")
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Agenda")
 
-                          ),
-                        ],
-                      ),
-                    ),
-                    new GestureDetector (
-                      onTap: () {
-                        Navigator.push (context,
-                            MaterialPageRoute(builder: (context) => Locations())
-                        );
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  'assets/images/icons/mapTwo.png'
-                                )
-                              )
+                                  ),
+                                ],
+                              ),
                             ),
+                            new GestureDetector (
+                              onTap: () {
+                                Navigator.push (context,
+                                    MaterialPageRoute(builder: (context) => Locations())
+                                );
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/mapTwo.png'
+                                            )
+                                        )
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.location_on ),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Location")
-                          ),
-                        ],
-                      ),
-                    ),
-                    new GestureDetector (
-                      onTap: () {Navigator.push (
-                          context,
-                          MaterialPageRoute(builder: (context) => NewSpeakers()));},
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  'assets/images/icons/megaphoneTwo.png'
-                                )
-                              )
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Location")
+                                  ),
+                                ],
+                              ),
                             ),
+                            new GestureDetector (
+                              onTap: () {Navigator.push (
+                                  context,
+                                  MaterialPageRoute(builder: (context) => NewSpeakers()));},
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/megaphoneTwo.png'
+                                            )
+                                        )
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.mic),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Speakers")
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Padding (padding: EdgeInsets.only(top: 76.0)),
-                new Row (
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    new GestureDetector (
-                      onTap: () {
-                        Navigator.push (context,
-                            MaterialPageRoute(builder: (context) => NewExhibitions())
-                        );
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  'assets/images/icons/exhibitionTwo.png'
-                                )
-                              )
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Speakers")
+                                  ),
+                                ],
+                              ),
                             ),
+                          ],
+                        ),
+                        Padding (padding: EdgeInsets.only(top: 76.0)),
+                        new Row (
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            new GestureDetector (
+                              onTap: () {
+                                Navigator.push (context,
+                                    MaterialPageRoute(builder: (context) => NewExhibitions())
+                                );
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/exhibitionTwo.png'
+                                            )
+                                        )
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.card_membership ),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Exhibitions")
-                          ),
-                        ],
-                      ),
-                    ),
-                    new GestureDetector (
-                      onTap: () {
-                        Navigator.push (context,
-                            MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data,))
-                        );
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                                image: new DecorationImage(
-                                    image: new AssetImage(
-                                        'assets/images/icons/discussionTwo.png'
-                                    )
-                                )
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Exhibitions")
+                                  ),
+                                ],
+                              ),
                             ),
+                            new GestureDetector (
+                              onTap: () {
+                                Navigator.push (context,
+                                    MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data,))
+                                );
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/discussionTwo.png'
+                                            )
+                                        )
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.chat ),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Chatter Forum")
-                          ),
-                        ],
-                      ),
-                    ),
-                    new GestureDetector (
-                      onTap: () {Navigator.push (context,
-                          MaterialPageRoute(builder: (context) => NewPartners()));},
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  'assets/images/icons/meetingTwo.png'
-                                )
-                              )
-
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Chatter Forum")
+                                  ),
+                                ],
+                              ),
                             ),
+                            new GestureDetector (
+                              onTap: () {Navigator.push (context,
+                                  MaterialPageRoute(builder: (context) => NewPartners()));},
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/meetingTwo.png'
+                                            )
+                                        )
+
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.person),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Partners")
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Padding (padding: EdgeInsets.only(top: 76.0)),
-                new Row (
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    new GestureDetector (
-                      onTap: () {
-                        Navigator.push (context,
-                            MaterialPageRoute(builder: (context) => Conference())
-                        );
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  'assets/images/icons/presentationTwo.png'
-                                )
-                              )
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Partners")
+                                  ),
+                                ],
+                              ),
                             ),
+                          ],
+                        ),
+                        Padding (padding: EdgeInsets.only(top: 76.0)),
+                        new Row (
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            new GestureDetector (
+                              onTap: () {
+                                Navigator.push (context,
+                                    MaterialPageRoute(builder: (context) => Conference())
+                                );
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: new BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/presentationTwo.png'
+                                            )
+                                        )
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.info ),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("Conference")
-                          ),
-                        ],
-                      ),
-                    ),
-                    new GestureDetector (
-                      onTap: () {
-                        if (_authStatus == AuthStatus.notSignedIn) {
-                          _showDialog(context);
-                        }
-                        else {
-                          Navigator.push (
-                              context,
-                              MaterialPageRoute(builder: (context) => NewMessages(data: widget.data))
-                          );
-                        }
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                                image: new DecorationImage(
-                                    image: new AssetImage(
-                                        'assets/images/icons/messages.png'
-                                    )
-                                )
-
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("Conference")
+                                  ),
+                                ],
+                              ),
                             ),
+                            new GestureDetector (
+                              onTap: () {
+                                if (_authStatus == AuthStatus.notSignedIn) {
+                                  _showDialog(context);
+                                }
+                                else {
+                                  Navigator.push (
+                                      context,
+                                      MaterialPageRoute(builder: (context) => NewMessages(data: widget.data))
+                                  );
+                                }
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/messages.png'
+                                            )
+                                        )
+
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.feedback ),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("My Messages")
-                          ),
-                        ],
-                      ),
-                    ),
-                    new GestureDetector (
-                      onTap: () {
-                        Navigator.push (context,
-                            MaterialPageRoute(builder: (context) => Faq())
-                        );
-                      },
-                      child: new Column (
-                        children: <Widget> [
-                          new Container(
-                            width: ScreenUtil.getInstance().setWidth(135),
-                            height: ScreenUtil.getInstance().setHeight(135),
-                            decoration: BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  'assets/images/icons/faq.png'
-                                )
-                              )
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("My Messages")
+                                  ),
+                                ],
+                              ),
                             ),
+                            new GestureDetector (
+                              onTap: () {
+                                Navigator.push (context,
+                                    MaterialPageRoute(builder: (context) => Faq())
+                                );
+                              },
+                              child: new Column (
+                                children: <Widget> [
+                                  new Container(
+                                    width: ScreenUtil.getInstance().setWidth(135),
+                                    height: ScreenUtil.getInstance().setHeight(135),
+                                    decoration: BoxDecoration(
+                                        image: new DecorationImage(
+                                            image: new AssetImage(
+                                                'assets/images/icons/faq.png'
+                                            )
+                                        )
+                                    ),
 //                            child: new Center (
 //                              child: new Icon(Icons.thumb_up),
 //                            ),
-                          ),
-                          Padding (padding: EdgeInsets.only(top: 6.0)),
-                          new Container(
-                              child: Text("FAQ")
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                                  ),
+                                  Padding (padding: EdgeInsets.only(top: 6.0)),
+                                  new Container(
+                                      child: Text("FAQ")
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
 //                Padding (padding: EdgeInsets.only(top: 46.0)),
 //                new Row (
 //                  crossAxisAlignment: CrossAxisAlignment.start,
@@ -1369,11 +1401,20 @@ class _HomePageState extends State<HomePage> {
 //                    ),
 //                  ],
 //                ),
-                Padding (padding: EdgeInsets.only(top: 36.0)),
+//                      ],
+//                    ),
+//                  ),
+//                ),
                 new Container(
-                  child: Text("Powered by Central Bank of Nigeria",
-                      style: TextStyle(color: Color.fromRGBO(192, 192, 192, 1))),
-                ),
+                  padding: EdgeInsets.only(top: 36.0),
+//                  height: MediaQuery.of(context).devicePixelRatio,
+                  child: new Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: new Text("Powered by Central Bank of Nigeria",
+                        style: TextStyle(color: Color.fromRGBO(192, 192, 192, 1))),
+                  )
+
+                )
               ],
             ),
           ),
