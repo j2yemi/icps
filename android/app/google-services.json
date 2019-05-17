@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "344123100964",
+    "firebase_url": "https://icps-b65df.firebaseio.com",
+    "project_id": "icps-b65df",
+    "storage_bucket": "icps-b65df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344123100964:android:51cf41e2abae1ba5",
+        "android_client_info": {
+          "package_name": "com.centrifugegroup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344123100964-vpf1451bista0flf6mu3j98a7vte1fbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA56FKGaomK-n9Jxl4OPUcoS4TicGun5QE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344123100964:android:3006cb66bef519db",
+        "android_client_info": {
+          "package_name": "com.centrifugegroup.icps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344123100964-vpf1451bista0flf6mu3j98a7vte1fbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA56FKGaomK-n9Jxl4OPUcoS4TicGun5QE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
