@@ -42,7 +42,7 @@ dependencies:
   fab_menu: ^0.0.2
   font_awesome_flutter: ^8.4.0
   cached_network_image: ^0.8.0
-  mailer: ^2.3.0
+#  mailer: ^2.3.0
   text_view:
     path: ../text_view
 #  simple_permissions: ^0.1.9

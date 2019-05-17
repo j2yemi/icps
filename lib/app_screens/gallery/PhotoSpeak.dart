@@ -21,9 +21,9 @@ import 'package:intl/intl.dart';
 
 class PhotoSpeak extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  PhotoSpeak({this.data});
+  PhotoSpeak({this.data, this.password});
 
   @override
   _PhotoSpeakState createState() => _PhotoSpeakState();
@@ -235,7 +235,7 @@ class _PhotoSpeakState extends State<PhotoSpeak> {
         onPressed: () {
 //          _authStatus = AuthStatus.notSignedIn;
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SharePic())
+              MaterialPageRoute(builder: (context) => SharePic(data: widget.data,))
           );
         },
       ),

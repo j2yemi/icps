@@ -16,9 +16,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExhibitionsRegister extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  ExhibitionsRegister({this.data});
+  ExhibitionsRegister({this.data, this.password});
 
   @override
   _ExhibitionsRegisterState createState() => _ExhibitionsRegisterState();

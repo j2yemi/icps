@@ -20,9 +20,9 @@ import 'package:icps/ExhibitionsJson.dart';
 
 class NewExhibitions extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  NewExhibitions({this.data});
+  NewExhibitions({this.data, this.password});
 
   @override
   _NewExhibitionsState createState() => _NewExhibitionsState();
@@ -169,7 +169,7 @@ class _NewExhibitionsState extends State<NewExhibitions> {
                     return new Center(
                         child: new Container(
                           padding: new EdgeInsets.only(top: 35.0),
-                          child: new Text('No Exhibitions here yet',
+                          child: new Text('No Exhibition here yet',
                             style: new TextStyle(
                               fontSize: ScreenUtil(
                                   allowFontScaling: true)
@@ -194,7 +194,7 @@ class _NewExhibitionsState extends State<NewExhibitions> {
                         child: new GestureDetector(
                           onTap: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => ExhibitionsProfile(snapshot.data[index], widget.data))
+                                MaterialPageRoute(builder: (context) => ExhibitionsProfile(exhibition: snapshot.data[index], data: widget.data, password: widget.password,))
                             );
                           },
 //                          padding: new EdgeInsets.only(left: 5.0, right: 5.0),
@@ -312,7 +312,7 @@ class _NewExhibitionsState extends State<NewExhibitions> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -323,13 +323,13 @@ class _NewExhibitionsState extends State<NewExhibitions> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }
@@ -370,9 +370,9 @@ class _NewExhibitionsState extends State<NewExhibitions> {
 
 class ExhibitionsProfile extends StatefulWidget {
 
-  final Exhibition exhibition; Data data;
+  final Exhibition exhibition; Data data; String password;
 
-  ExhibitionsProfile(this.exhibition, this.data);
+  ExhibitionsProfile({this.exhibition, this.data, this.password});
 
   @override
   _ExhibitionsProfileState createState() => _ExhibitionsProfileState();
@@ -699,7 +699,7 @@ class _ExhibitionsProfileState extends State<ExhibitionsProfile> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -710,13 +710,13 @@ class _ExhibitionsProfileState extends State<ExhibitionsProfile> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }

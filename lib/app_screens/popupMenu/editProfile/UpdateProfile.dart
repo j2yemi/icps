@@ -26,6 +26,12 @@ class UpdatePic extends StatefulWidget {
   _UpdatePicState createState() => _UpdatePicState();
 }
 
+enum AuthStatus {
+  notSignedIn,
+  signedIn,
+  signedInSpeaker
+}
+
 class _UpdatePicState extends State<UpdatePic> {
 
   AuthStatus _authStatus = AuthStatus.notSignedIn;

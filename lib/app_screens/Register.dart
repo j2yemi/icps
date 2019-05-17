@@ -12,9 +12,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:icps/app_screens/drawer/login.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mailer/mailer.dart';
+//import 'package:mailer/mailer.dart';
 //import 'package:mailer/smtp_server.dart';
-import 'package:mailer/smtp_server/mailgun.dart';
+//import 'package:mailer/smtp_server/mailgun.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icps/UsersInfo.dart';
@@ -848,7 +848,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
 //          autovalidate: _autoValidate,
-                  validator: (value) => value.isEmpty ? 'Confirmation code can\'t be empty' : null,
+                  validator: (value) => validationCode(value),
                   onSaved: (value) => _code = value,
                 ),
               ),
@@ -1019,6 +1019,19 @@ class _RegisterState extends State<Register> {
       return null;
   }
 
+  String validationCode (String value) {
+//    Pattern pattern = r'(^[a-zA-Z ])*$';
+
+//    RegExp regex = new RegExp(pattern);
+
+    if (value.length == 0)
+      return 'Confirmation Code is Required';
+    else if (confirmationCode != value)
+      return 'Enter Valid Confirmation Code';
+    else
+      return null;
+  }
+
   bool validateAndSave () {
     final form = formKey.currentState;
     if (form.validate()) {
@@ -1046,7 +1059,7 @@ class _RegisterState extends State<Register> {
 
   void _generateConfirmationCode() {
 
-    String phoneCharacter = _phone.trim().substring(5, _phone.length - 1);
+    String phoneCharacter = _phone.trim().substring(_phone.length - 2, _phone.length - 1);
 
     var rng = new Random();
 
@@ -1054,9 +1067,9 @@ class _RegisterState extends State<Register> {
 
     for (var i = 0; i < 3; i++) {
 
-      print(rng.nextInt(100));
+      print(rng.nextInt(9));
 
-      rnd = rng.nextInt(100).toString() + rng.nextInt(100).toString();
+      rnd = rng.nextInt(9).toString() + rng.nextInt(9).toString();
     }
 
     setState(() {
@@ -1156,8 +1169,8 @@ class _RegisterState extends State<Register> {
         }
         else
         {
-          _authenticate();
-
+//          _authenticate();
+            _register();
 //          _showDialog(context, 'Registering');
 //
 //          response = await dio.post(sendUrl, queryParameters: {
@@ -1264,7 +1277,7 @@ class _RegisterState extends State<Register> {
     String eusername = 'icps@centrifugegroup.com';
     String epassword = 'Precious@123';
 
-    final smtpServer = mailgun(eusername, epassword);
+//    final smtpServer = mailgun(eusername, epassword);
 
     // Create our message.
 
@@ -1275,19 +1288,19 @@ class _RegisterState extends State<Register> {
 //        'We have received your application on our app.\nPlease enter this confirmation code to complete your registration process\n'
 //        'Confirmation code:\n $confirmationCode';
 
-    final message = new Message()
-      ..from = new Address(eusername, 'ICPS 19')
-      ..recipients.add(new Address(_email))
-//      ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
-//      ..bccRecipients.add(new Address('bccAddress@example.com'))
-      ..subject = '$subject:: ${new DateTime.now()}'
-//      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html = "<h1>Hey $_currentTitleSelected $_surname $_firstname</h1>\n<p>We have received your application on our app</p>"
-          "<p>Please enter this confirmation code to complete your registration process</p> "
-          "<p>Confirmation code:\n <span style='color: #98A057;'>$confirmationCode</span></p>";
-
-    final sendReports = await send(message, smtpServer).then((message) => print('Email sent!'))
-        .catchError((e) => print('Error occurred: $e'));
+//    final message = new Message()
+//      ..from = new Address(eusername, 'ICPS 19')
+//      ..recipients.add(new Address(_email))
+////      ..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
+////      ..bccRecipients.add(new Address('bccAddress@example.com'))
+//      ..subject = '$subject:: ${new DateTime.now()}'
+////      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+//      ..html = "<h1>Hey $_currentTitleSelected $_surname $_firstname</h1>\n<p>We have received your application on our app</p>"
+//          "<p>Please enter this confirmation code to complete your registration process</p> "
+//          "<p>Confirmation code:\n <span style='color: #98A057;'>$confirmationCode</span></p>";
+//
+//    final sendReports = await send(message, smtpServer).then((message) => print('Email sent!'))
+//        .catchError((e) => print('Error occurred: $e'));
 
     Future.delayed (Duration(seconds: 3),
             () async {
@@ -2157,164 +2170,177 @@ class _RegisterState extends State<Register> {
 
   void _register() async {
 
-    Response response;
-    Dio dio = new Dio();
-    String sendUrl ='http://icps19.com:6060/icps/i/icps/19/urg';
-    _showDialog(context, 'Registering');
+//    if (confirmationCode == _code) {
+      Response response;
+      Dio dio = new Dio();
+      String sendUrl ='http://icps19.com:6060/icps/i/icps/19/urg';
+      _showDialog(context, 'Registering');
 
-    response = await dio.post(sendUrl, queryParameters: {
-      "companysector": _currentCompanySectorSelected,
-      "conference_id": '',
-      "country": _currentCountrySelected,
-      "email": _email,
-      "facebook_id": _facebookId,
-      "firstname": _firstname,
-      "instagram_id": '',
-      "loginstatus": 'A',
-      "moderator_yn": false,
-      "organisation": _organization,
-      "participant_type": signUpType,
-      "password": _password,
-      "phone": _phone,
-      "pic_id": null,
-      "short_profile": _shortProfile,
-      "speaker_yn": false,
-      "surname": _surname,
-      "title": _currentTitleSelected,
-      "twitter_id": _twitterId,
-//            "userinfoid": widget.user.id,
-      "username": _username,
-      "website": _website,
-      "work_position": _jobTitle,
-    },
-        options: Options(
-          headers: {
-            HttpHeaders.contentTypeHeader: 'application/json',
-            "accept": "application/json"
-          },)
-    );
-    print(response.statusCode);
-
-    Navigator.pop(context, (response.statusCode == 200 || response.statusCode == 401));
-
-    if (response.statusCode == 401)
-    {
-      Fluttertoast.showToast(
-          msg: "Oops, something went wrong, try again.",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIos: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0
+      response = await dio.post(sendUrl, queryParameters: {
+        "companysector": _currentCompanySectorSelected,
+        "conference_id": confirmationCode,
+        "country": _currentCountrySelected,
+        "email": _email,
+        "facebook_id": _facebookId,
+        "firstname": _firstname,
+        "instagram_id": '',
+        "loginstatus": 'A',
+        "moderator_yn": false,
+        "organisation": _organization,
+        "participant_type": signUpType,
+        "password": _password,
+        "phone": _phone,
+        "pic_id": null,
+        "short_profile": _shortProfile,
+        "speaker_yn": false,
+        "surname": _surname,
+        "title": _currentTitleSelected,
+        "twitter_id": _twitterId,
+  //            "userinfoid": widget.user.id,
+        "username": _username,
+        "website": _website,
+        "work_position": _jobTitle,
+      },
+          options: Options(
+            headers: {
+              HttpHeaders.contentTypeHeader: 'application/json',
+              "accept": "application/json"
+            },)
       );
-//            Toast.show("Oops, something went wrong, try again.", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-    }
-    else
-    {
-      Fluttertoast.showToast(
-          msg: "Account created successfully, please wait",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIos: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+      print(response.statusCode);
 
-      Future.delayed (Duration(seconds: 0),
-              () async {
-//            Fluttertoast.showToast(
-//                msg: "Redirecting",
-//                toastLength: Toast.LENGTH_SHORT,
-//                gravity: ToastGravity.BOTTOM,
-//                timeInSecForIos: 6,
-//                backgroundColor: Colors.black,
-//                textColor: Colors.white,
-//                fontSize: 16.0
-//            );
+      Navigator.pop(context, (response.statusCode == 200 || response.statusCode == 401));
 
-            Future.delayed (Duration(seconds: 2),
-                    () async {
+      if (response.statusCode == 401)
+      {
+        Fluttertoast.showToast(
+            msg: "Oops, something went wrong, try again.",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+  //            Toast.show("Oops, something went wrong, try again.", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+      }
+      else
+      {
+        Fluttertoast.showToast(
+            msg: "Account created successfully, please wait",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
 
-                  String findUrl ='http://icps19.com:6060/icps/i/icps/19/urp';
-                  dio.options.connectTimeout = 50000;
-                  response = await dio.get(findUrl, queryParameters: {"username": _username, "password": _password});
-                  print(response.statusCode);
+        Future.delayed (Duration(seconds: 0),
+                () async {
+  //            Fluttertoast.showToast(
+  //                msg: "Redirecting",
+  //                toastLength: Toast.LENGTH_SHORT,
+  //                gravity: ToastGravity.BOTTOM,
+  //                timeInSecForIos: 6,
+  //                backgroundColor: Colors.black,
+  //                textColor: Colors.white,
+  //                fontSize: 16.0
+  //            );
 
-                  Navigator.pop(context, (response.statusCode == 200 || response.statusCode == 401));
+              Future.delayed (Duration(seconds: 2),
+                      () async {
 
-                  if(response.statusCode == 200){
-                    print(UsersInfo.fromJson(response.data).surname);
-                    print(UsersInfo.fromJson(response.data).speakerYn);
-                    print(UsersInfo.fromJson(response.data).workPosition);
+                    String findUrl ='http://icps19.com:6060/icps/i/icps/19/urp';
+                    dio.options.connectTimeout = 50000;
+                    response = await dio.get(findUrl, queryParameters: {"username": _username, "password": _password});
+                    print(response.statusCode);
 
-//            userSurname = UsersInfo.fromJson(response.data).surname;
-//
-//            userFirstname = UsersInfo.fromJson(response.data).firstname;
-//
-//            var data = Data (
-//              surname: userSurname,
-//              firstname: userFirstname
-//            );
+                    Navigator.pop(context, (response.statusCode == 200 || response.statusCode == 401));
 
-                    var data2 = DataTwo.fromUsersInfo(UsersInfo.fromJson(response.data));
+                    if(response.statusCode == 200){
+                      print(UsersInfo.fromJson(response.data).surname);
+                      print(UsersInfo.fromJson(response.data).speakerYn);
+                      print(UsersInfo.fromJson(response.data).workPosition);
 
-                    Fluttertoast.showToast(
-                        msg: "Login successful, please wait",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIos: 6,
-                        backgroundColor: Colors.black,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+  //            userSurname = UsersInfo.fromJson(response.data).surname;
+  //
+  //            userFirstname = UsersInfo.fromJson(response.data).firstname;
+  //
+  //            var data = Data (
+  //              surname: userSurname,
+  //              firstname: userFirstname
+  //            );
 
-                    Future.delayed (Duration(seconds: 3),
-                            () async {
-                          Fluttertoast.showToast(
-                              msg: "Redirecting",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIos: 6,
-                              backgroundColor: Colors.black,
-                              textColor: Colors.white,
-                              fontSize: 16.0
-                          );
+                      var data2 = DataTwo.fromUsersInfo(UsersInfo.fromJson(response.data));
 
-                          Future.delayed (Duration(seconds: 2),
-                                  () async {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => HomePage(data2: data2, password: _password))
-                                );
-                                print('5 seconds');
-                              }
-                          );
-                        }
-                    );
+                      Fluttertoast.showToast(
+                          msg: "Login successful, please wait",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIos: 6,
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+
+                      Future.delayed (Duration(seconds: 3),
+                              () async {
+                            Fluttertoast.showToast(
+                                msg: "Redirecting",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIos: 6,
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+
+                            Future.delayed (Duration(seconds: 2),
+                                    () async {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => HomePage(data2: data2, password: _password))
+                                  );
+                                  print('5 seconds');
+                                }
+                            );
+                          }
+                      );
+                    }
+                    else if(response.statusCode == 401)
+                    {
+                      print('Something went wrong $response.statusCode');
+
+                      Fluttertoast.showToast(
+                          msg: "Something went wrong $response.statusCode",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIos: 1,
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+
+  //            Toast.show("Something went wrong $response.statusCode", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                    }
+                    print('5 seconds');
                   }
-                  else if(response.statusCode == 401)
-                  {
-                    print('Something went wrong $response.statusCode');
-
-                    Fluttertoast.showToast(
-                        msg: "Something went wrong $response.statusCode",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIos: 1,
-                        backgroundColor: Colors.black,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
-
-//            Toast.show("Something went wrong $response.statusCode", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                  }
-                  print('5 seconds');
-                }
-            );
-          }
-      );
-    }
+              );
+            }
+        );
+      }
+//    }
+//    else {
+//        Fluttertoast.showToast(
+//        msg: "Incorrect Confirmation code try again",
+//        toastLength: Toast.LENGTH_LONG,
+//        gravity: ToastGravity.BOTTOM,
+//        timeInSecForIos: 1,
+//        backgroundColor: Colors.black,
+//        textColor: Colors.white,
+//        fontSize: 16.0
+//      );
+//    }
 
   }
 
@@ -2550,12 +2576,13 @@ class DataTwo
   String username;
   String website;
   dynamic workPosition;
+  int userinfoid;
 
   DataTwo ({this.id = 0, this.surname = '', this.firstname = '', this.speaker = false, this.companysector = '',
     this.conferenceId = '', this.country = '', this.email = '', this.facebookId = '', this.instagramId = '',
     this.loginstatus = 'A', this.moderatorYn = false, this.organisation = '', this.participantType = '',
     this.password = '', this.phone = '', this.picId = '', this.shortProfile = '', this.title = '',
-    this.twitterId = '', this.username = '', this.website = '', this.workPosition = ''
+    this.twitterId = '', this.username = '', this.website = '', this.workPosition = '', this.userinfoid = 0,
   });
 
   factory DataTwo.fromUsersInfo(UsersInfo info)
@@ -2582,7 +2609,8 @@ class DataTwo
         twitterId: info.twitterId,
         username: info.username,
         website: info.website,
-        workPosition: info.workPosition
+        workPosition: info.workPosition,
+        userinfoid: info.userinfoid
     );
   }
 }

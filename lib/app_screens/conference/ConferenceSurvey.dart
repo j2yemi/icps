@@ -22,9 +22,9 @@ void main() {
 
 class ConferenceSurvey extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  ConferenceSurvey({this.data});
+  ConferenceSurvey({this.data, this.password});
 
   @override
   _ConferenceSurveyState createState() => _ConferenceSurveyState();

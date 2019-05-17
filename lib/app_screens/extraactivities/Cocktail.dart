@@ -24,9 +24,9 @@ import 'package:intl/intl.dart';
 
 class Cocktail extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  Cocktail({this.data});
+  Cocktail({this.data, this.password});
 
   @override
   _CocktailState createState() => _CocktailState();
@@ -477,7 +477,7 @@ class _CocktailState extends State<Cocktail> {
 
   void _generateConfirmationCode() {
 
-    String phoneCharacter = widget.data.phone.trim().substring(5, widget.data.phone.length - 1);
+    String phoneCharacter = widget.data.phone.trim().substring(widget.data.phone.length - 2, widget.data.phone.length - 1);
 
     var rng = new Random();
 
@@ -485,9 +485,9 @@ class _CocktailState extends State<Cocktail> {
 
     for (var i = 0; i < 3; i++) {
 
-      print(rng.nextInt(99));
+      print(rng.nextInt(9));
 
-      rnd = rng.nextInt(99).toString() + rng.nextInt(9).toString();
+      rnd = rng.nextInt(9).toString() + rng.nextInt(9).toString();
     }
 
     setState(() {

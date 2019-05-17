@@ -20,9 +20,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NewSpeakers extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  NewSpeakers({this.data});
+  NewSpeakers({this.data, this.password});
 
   @override
   _NewSpeakersState createState() => _NewSpeakersState();
@@ -175,6 +175,20 @@ class _NewSpeakersState extends State<NewSpeakers> {
                         ),
                       );
                     }
+                    else if (snapshot.data.length == 0) {
+                      return new Center(
+                          child: new Container(
+                            padding: new EdgeInsets.only(top: 35.0),
+                            child: new Text('No Speaker here yet',
+                              style: new TextStyle(
+                                fontSize: ScreenUtil(
+                                    allowFontScaling: true)
+                                    .setSp(31),
+                              ),
+                            ),
+                          )
+                      );
+                    }
                     return GridView.builder(
                         controller: controller,
                         shrinkWrap: true,
@@ -191,7 +205,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
 //                              padding: new EdgeInsets.only(left: 5.0, right: 5.0),
                               onTap: () {
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => SpeakersProfile(snapshot.data[index], widget.data))
+                                    MaterialPageRoute(builder: (context) => SpeakersProfile(conferenceSpeaker: snapshot.data[index], data: widget.data, password: widget.password,))
                                 );
                               },
                               child: new Column(
@@ -356,7 +370,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -367,13 +381,13 @@ class _NewSpeakersState extends State<NewSpeakers> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }
@@ -414,9 +428,9 @@ class _NewSpeakersState extends State<NewSpeakers> {
 
 class SpeakersProfile extends StatefulWidget {
 
-  final ConferenceSpeaker conferenceSpeaker; Data data;
+  final ConferenceSpeaker conferenceSpeaker; Data data; String password;
 
-  SpeakersProfile(this.conferenceSpeaker, this.data);
+  SpeakersProfile({this.conferenceSpeaker, this.data, this.password});
 
   @override
   _SpeakersProfileState createState() => _SpeakersProfileState();
@@ -515,7 +529,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                         ) :
                         new Container(
                           width: MediaQuery.of(context).size.width,
-                          height: ScreenUtil.getInstance().setHeight(735),
+                          height: ScreenUtil.getInstance().setHeight(815),
                           decoration: new BoxDecoration(
                             image: new DecorationImage(
                               image: new NetworkImage(url + widget.conferenceSpeaker.pic_id),
@@ -532,7 +546,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                     ),
                   ),
                   new Positioned(
-                    top: 220.0,
+                    top: 290.0,
                     left: 20.0,
                     child: new Card(
                       shape: RoundedRectangleBorder(
@@ -864,7 +878,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -875,13 +889,13 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }

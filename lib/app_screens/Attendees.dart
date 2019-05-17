@@ -34,9 +34,9 @@ void main() {
 
 class Attendees extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  Attendees({this.data});
+  Attendees({this.data, this.password});
 
   @override
   _AttendeesState createState() => _AttendeesState();
@@ -637,7 +637,7 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                         ) :
                         new Container(
                           width: MediaQuery.of(context).size.width,
-                          height: ScreenUtil.getInstance().setHeight(735),
+                          height: ScreenUtil.getInstance().setHeight(815),
                           decoration: new BoxDecoration(
                               image: new DecorationImage(
                                 image: new NetworkImage(url + widget.joinAttendee.usersInfo.picId),
@@ -654,7 +654,7 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                     ),
                   ),
                   new Positioned(
-                    top: 220.0,
+                    top: 290.0,
                     left: 20.0,
                     child: new Card(
                       shape: RoundedRectangleBorder(

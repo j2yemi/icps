@@ -32,8 +32,9 @@ void main() {
 
 class NewMessages extends StatefulWidget {
 
-  Data data;
-  NewMessages({this.data});
+  Data data; String password;
+
+  NewMessages({this.data, this.password});
 
   @override
   _NewMessagesState createState() => _NewMessagesState();
@@ -253,7 +254,7 @@ class _NewMessagesState extends State<NewMessages> {
             child: new Icon(Icons.edit),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ComposeMessage(data: widget.data))
+                  MaterialPageRoute(builder: (context) => ComposeMessage(data: widget.data, password: widget.password))
               );
             },
             backgroundColor: Color.fromRGBO(152, 160, 87, 1),

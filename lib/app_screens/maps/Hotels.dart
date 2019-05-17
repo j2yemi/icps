@@ -19,6 +19,13 @@ import 'package:icps/app_screens/maps/hotels/Kebbi.dart';
 import 'package:icps/app_screens/maps/hotels/Elvis.dart';
 import 'package:icps/app_screens/maps/hotels/Roses.dart';
 import 'package:icps/app_screens/maps/hotels/Petrus.dart';
+import 'package:icps/Constants.dart';
+import 'package:icps/app_screens/Register.dart';
+import 'package:icps/app_screens/drawer/Login.dart';
+
+import 'package:icps/app_screens/popupMenu/Dashboard.dart';
+import 'package:icps/app_screens/popupMenu/EditProfile.dart';
+import 'package:icps/app_screens/popupMenu/Settings.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_rating/flutter_rating.dart';
@@ -32,14 +39,38 @@ void main() {
   )
   );
 }
+
 class Hotels extends StatefulWidget {
+
+  Data data; String password;
+
+  Hotels({this.data, this.password});
+
   @override
   _HotelsState createState() => new _HotelsState();
+}
+
+enum AuthStatus {
+  notSignedIn,
+  signedIn,
+  signedInSpeaker
 }
 
 class _HotelsState extends State<Hotels> {
   double rating = 4.1;
   int starCount = 5;
+
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.data = widget.data ?? Data();
+
+    _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +88,22 @@ class _HotelsState extends State<Hotels> {
           ),
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(
-              Icons.search
-          ),
-            onPressed: () {
-
+//          IconButton(icon: Icon(
+//              Icons.search
+//          ),
+//            onPressed: () {
+//
+//            },
+//          ),
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: new Text(choice),
+                );
+              }).toList();
             },
           ),
         ],
@@ -85,7 +127,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Boardwalk())
+                      MaterialPageRoute(builder: (context) => Boardwalk(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -141,11 +183,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(63)',
@@ -203,7 +245,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Serendib())
+                      MaterialPageRoute(builder: (context) => Serendib(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -259,11 +301,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(18)',
@@ -321,7 +363,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Fraser())
+                      MaterialPageRoute(builder: (context) => Fraser(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -375,11 +417,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                      () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                      () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(707)',
@@ -449,7 +491,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Transcorp())
+                      MaterialPageRoute(builder: (context) => Transcorp(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -503,11 +545,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(7,295)',
@@ -576,7 +618,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Corinthia())
+                      MaterialPageRoute(builder: (context) => Corinthia(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -630,11 +672,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(334)',
@@ -692,7 +734,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Sheraton())
+                      MaterialPageRoute(builder: (context) => Sheraton(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -746,11 +788,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(3,319)',
@@ -825,7 +867,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Valencia())
+                      MaterialPageRoute(builder: (context) => Valencia(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -879,11 +921,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(303)',
@@ -950,7 +992,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Quo())
+                      MaterialPageRoute(builder: (context) => Quo(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1004,11 +1046,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(103)',
@@ -1066,7 +1108,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Yaban())
+                      MaterialPageRoute(builder: (context) => Yaban(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1120,11 +1162,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(29)',
@@ -1182,7 +1224,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Citilodge())
+                      MaterialPageRoute(builder: (context) => Citilodge(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1236,11 +1278,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(94)',
@@ -1298,7 +1340,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Newton())
+                      MaterialPageRoute(builder: (context) => Newton(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1352,11 +1394,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(394)',
@@ -1414,7 +1456,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Vynedresa())
+                      MaterialPageRoute(builder: (context) => Vynedresa(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1468,11 +1510,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(94)',
@@ -1530,7 +1572,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Ambassador())
+                      MaterialPageRoute(builder: (context) => Ambassador(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1584,11 +1626,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(19)',
@@ -1646,7 +1688,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Western())
+                      MaterialPageRoute(builder: (context) => Western(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1700,11 +1742,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(130)',
@@ -1767,7 +1809,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Oak())
+                      MaterialPageRoute(builder: (context) => Oak(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1821,11 +1863,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(199)',
@@ -1883,7 +1925,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Kebbi())
+                      MaterialPageRoute(builder: (context) => Kebbi(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -1937,11 +1979,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(68)',
@@ -1999,7 +2041,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Elvis())
+                      MaterialPageRoute(builder: (context) => Elvis(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -2053,11 +2095,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(26)',
@@ -2123,7 +2165,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Roses())
+                      MaterialPageRoute(builder: (context) => Roses(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -2177,11 +2219,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(17)',
@@ -2239,7 +2281,7 @@ class _HotelsState extends State<Hotels> {
               child: new GestureDetector (
                 onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Petrus())
+                      MaterialPageRoute(builder: (context) => Petrus(data: widget.data, password: widget.password))
                   );
                 },
                 child: new Row (
@@ -2293,11 +2335,11 @@ class _HotelsState extends State<Hotels> {
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
                                     starCount: starCount,
-                                    onRatingChanged: (rating) => setState(
-                                          () {
-                                        this.rating = rating;
-                                      },
-                                    ),
+//                                    onRatingChanged: (rating) => setState(
+//                                          () {
+//                                        this.rating = rating;
+//                                      },
+//                                    ),
                                   ),
                                   new Container(
                                     child: new Text('(94)',
@@ -2344,6 +2386,65 @@ class _HotelsState extends State<Hotels> {
           ],
         ),
       ),
+    );
+  }
+
+  void choiceAction (String choice)
+  {
+    if (choice == Constants.Dashboard){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
+      );
+    }
+    else if (choice == Constants.EditProfile){
+      if (_authStatus == AuthStatus.notSignedIn)
+      {
+        _showDialog(context);
+      }
+      else
+      {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password,))
+        );
+      }
+    }
+    else if (choice == Constants.Settings){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password,))
+      );
+    }
+  }
+
+  void _showDialog (BuildContext context)
+  {
+    var alertDialog = AlertDialog(
+      title: new Text('Login'),
+      content: new Text('You are not Logged in'),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('Login'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Login()));
+          },
+        ),
+        new FlatButton(
+          child: new Text('Register'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Register()));
+          },
+        ),
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+//       if (progressString != '100%') {
+        return alertDialog;
+
+//       }
+      },
+//        barrierDismissible: false
     );
   }
 }

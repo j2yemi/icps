@@ -693,7 +693,7 @@ class _EditProfileState extends State<EditProfile> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -710,7 +710,7 @@ class _EditProfileState extends State<EditProfile> {
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }

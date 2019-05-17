@@ -2,6 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:icps/app_screens/Conference.dart';
 import 'package:icps/DownloadFilesJson.dart';
+import 'package:icps/Constants.dart';
+import 'package:icps/app_screens/Register.dart';
+import 'package:icps/app_screens/drawer/Login.dart';
+
+import 'package:icps/app_screens/popupMenu/Dashboard.dart';
+import 'package:icps/app_screens/popupMenu/EditProfile.dart';
+import 'package:icps/app_screens/popupMenu/Settings.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,17 +23,30 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:open_file/open_file.dart';
 
 class ConferencePaper extends StatefulWidget {
+  Data data; String password;
+
+  ConferencePaper({this.data, this.password});
 
   @override
   _ConferencePaperState createState() => _ConferencePaperState ();
 }
 
+enum AuthStatus {
+  notSignedIn,
+  signedIn,
+  signedInSpeaker
+}
+
 class _ConferencePaperState extends State<ConferencePaper> {
+
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
 
   String progressString = '';
 
 //  GlobalKey _scaffold = Global Key();
   final global = GlobalKey();
+
+  String url = 'http://icps19.com:6060/icps/resources/conferencepresentations/profilepics/';
 
   Future <List<SpeakerPresentation>> _getPresentation() async
   {
@@ -113,6 +133,10 @@ class _ConferencePaperState extends State<ConferencePaper> {
     // TODO: implement initState
     super.initState();
 
+    widget.data = widget.data ?? Data();
+
+    _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
+
   }
 
   @override
@@ -134,11 +158,22 @@ class _ConferencePaperState extends State<ConferencePaper> {
           ),
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(
-              Icons.search
-          ),
-            onPressed: () {
-
+//          IconButton(icon: Icon(
+//              Icons.search
+//          ),
+//            onPressed: () {
+//
+//            },
+//          ),
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: new Text(choice),
+                );
+              }).toList();
             },
           ),
         ],
@@ -181,9 +216,24 @@ class _ConferencePaperState extends State<ConferencePaper> {
 
                       if (snapshot.data == null) {
                         return new Container(
+                          padding: new EdgeInsets.only(top: 55.0),
                           child: new Center(
-                            child: new Text('Loading...'),
+                            child: CircularProgressIndicator(),
                           ),
+                        );
+                      }
+                      else if (snapshot.data.length == 0) {
+                        return new Center(
+                            child: new Container(
+                              padding: new EdgeInsets.only(top: 35.0),
+                              child: new Text('No Conference Paper here yet',
+                                style: new TextStyle(
+                                  fontSize: ScreenUtil(
+                                      allowFontScaling: true)
+                                      .setSp(31),
+                                ),
+                              ),
+                            )
                         );
                       }
                       return ListView.builder(
@@ -211,6 +261,20 @@ class _ConferencePaperState extends State<ConferencePaper> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     new Container(
+                                      padding: new EdgeInsets.only(right: 20.0),
+                                      child: snapshot.data[index].usersInfo.picId == null
+                                          ? new CircleAvatar(
+                                        child: new Text('${snapshot.data[index].usersInfo.surname.substring(0, 1)}'
+                                            '${snapshot.data[index].usersInfo.firstname.substring(0, 1)}'
+                                        ),
+                                      )
+                                          : CircleAvatar(
+                                        backgroundImage: NetworkImage(url + snapshot.data[index].usersInfo.picId),
+                                        backgroundColor: Colors.transparent,
+                                      ),
+                                    ),
+                                    new Container(
+                                      width: ScreenUtil.getInstance().setWidth(398),
                                       child: new Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
@@ -225,6 +289,7 @@ class _ConferencePaperState extends State<ConferencePaper> {
                                             ),
                                           ),
                                           new Container(
+                                            width: ScreenUtil.getInstance().setWidth(410),
                                             margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
                                             child: new Text(snapshot.data[index].pTitle,
                                               style: new TextStyle (
@@ -234,17 +299,20 @@ class _ConferencePaperState extends State<ConferencePaper> {
                                             ),
                                           ),
                                           new Container(
-                                            width: ScreenUtil.getInstance().setWidth(470),
+                                            width: ScreenUtil.getInstance().setWidth(410),
                                             child: new Text (snapshot.data[index].pSubtitle),
                                           ),
-                                          new Divider (color: Colors.blue,)
+//                                          new Divider (color: Colors.blue,)
+                                          new SizedBox(
+                                            height: 20.0,
+                                          )
                                         ],
                                       ),
                                     ),
                                     new Container(
                                       margin: new EdgeInsets.only(right: 13.0),
                                       child:  new Icon(Icons.file_download,
-                                        size: 54.0,
+                                        size: 34.0,
                                         color: Color.fromRGBO(180, 188, 151, 1),
                                       ),
                                     ),
@@ -389,5 +457,64 @@ class _ConferencePaperState extends State<ConferencePaper> {
     );
 
 
+  }
+
+  void choiceAction (String choice)
+  {
+    if (choice == Constants.Dashboard){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
+      );
+    }
+    else if (choice == Constants.EditProfile){
+      if (_authStatus == AuthStatus.notSignedIn)
+      {
+        _showDialogTwo(context);
+      }
+      else
+      {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password,))
+        );
+      }
+    }
+    else if (choice == Constants.Settings){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password,))
+      );
+    }
+  }
+
+  void _showDialogTwo (BuildContext context)
+  {
+    var alertDialog = AlertDialog(
+      title: new Text('Login'),
+      content: new Text('You are not Logged in'),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('Login'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Login()));
+          },
+        ),
+        new FlatButton(
+          child: new Text('Register'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Register()));
+          },
+        ),
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+//       if (progressString != '100%') {
+        return alertDialog;
+
+//       }
+      },
+//        barrierDismissible: false
+    );
   }
 }

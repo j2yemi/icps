@@ -60,9 +60,9 @@ void main() async {
 
 class ComposeMessage extends StatefulWidget {
 
-  Data data; MyMessages myMessages; var to; TextEditingController toFilter;
+  Data data; MyMessages myMessages; var to; TextEditingController toFilter; String password;
 
-  ComposeMessage({this.data, this.myMessages, this.to, this.toFilter}) {
+  ComposeMessage({this.data, this.myMessages, this.to, this.toFilter, this.password}) {
 
     to = myMessages !=  null ? "${myMessages.usersInfo.title} ${myMessages.usersInfo.surname} ${myMessages.usersInfo.firstname}" : "";
 

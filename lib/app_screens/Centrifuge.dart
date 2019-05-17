@@ -20,9 +20,9 @@ void main() {
 
 class Centrifuge extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  Centrifuge({this.data});
+  Centrifuge({this.data, this.password});
 
   @override
   _CentrifugeState createState() => _CentrifugeState();

@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Drawer _buildDrawer (context) {
-    _getProfile();
+//    _getProfile();
     switch (_authStatus) {
       case AuthStatus.notSignedIn:
         return new Drawer(
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new Attendees(data: widget.data,)
+                                      builder: (context) => new Attendees(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new ExtraActivities(data: widget.data,)
+                                      builder: (context) => new ExtraActivities(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -237,12 +237,13 @@ class _HomePageState extends State<HomePage> {
                             ),
                             title: new Text('Papers/Publications'),
                             onTap: () {
-                              Navigator.pop(context);
-                              Navigator.push(context,
-                                  new MaterialPageRoute(
-                                      builder: (context) => new ConferencePaper()
-                                  )
-                              );
+//                              Navigator.pop(context);
+//                              Navigator.push(context,
+//                                  new MaterialPageRoute(
+//                                      builder: (context) => new ConferencePaper()
+//                                  )
+//                              );
+                              _showDialog(context);
                             },
                           ),
                         ]
@@ -258,50 +259,90 @@ class _HomePageState extends State<HomePage> {
                   child: new Column(
                     children: <Widget>[
                       Divider(),
+//                      new Container(
+//                        padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
+//                        child: new Row(
+//                          children: <Widget>[
+//                            new Container(
+//                              child: new Text('Technology: ',
+//                                style: new TextStyle(
+//                                  fontWeight: FontWeight.bold,
+//                                  color: Colors.grey
+//                                ),
+//                              ),
+//                            ),
+//                            new Container(
+//                              child: new Text('Java, DevOps',
+//                                style: new TextStyle(
+//                                  color: Colors.grey,
+//                                )
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
                       new Container(
-                        padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
-                        child: new Row(
-                          children: <Widget>[
-                            new Container(
-                              child: new Text('Technology: ',
-                                style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey
-                                ),
+                        padding: new EdgeInsets.only(left: 29.0),
+                        child: new Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: new FlatButton(
+                              child: new Text('Technology: Java, DevOps',
+                                  style: new TextStyle(
+                                      color: Colors.grey
+                                  )
                               ),
-                            ),
-                            new Container(
-                              child: new Text('Java, DevOps',
-                                style: new TextStyle(
-                                  color: Colors.grey,
-                                )
-                              ),
-                            ),
-                          ],
+                              onPressed: () {
+                                Navigator.push(context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
+                                    )
+                                );
+                              },
+                            )
                         ),
                       ),
                       new Container(
-                        padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
-                        child: new Row(
-                          children: <Widget>[
-                            new Container(
-                              child: new Text('Credits: ',
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey
-                                ),
+                        padding: new EdgeInsets.only(left: 29.0),
+                        child: new Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: new FlatButton(
+                              child: new Text('Credits: Central Bank of Nigeria',
+                                  style: new TextStyle(
+                                      color: Colors.grey
+                                  )
                               ),
-                            ),
-                            new Container(
-                              child: new Text('Central Bank of Nigeria',
-                                style: new TextStyle(
-                                  color: Colors.grey
-                                )
-                              ),
-                            ),
-                          ],
+                              onPressed: () {
+                                Navigator.push(context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
+                                    )
+                                );
+                              },
+                            )
                         ),
                       ),
+//                      new Container(
+//                        padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
+//                        child: new Row(
+//                          children: <Widget>[
+//                            new Container(
+//                              child: new Text('Credits: ',
+//                                style: new TextStyle(
+//                                    fontWeight: FontWeight.bold,
+//                                    color: Colors.grey
+//                                ),
+//                              ),
+//                            ),
+//                            new Container(
+//                              child: new Text('Central Bank of Nigeria',
+//                                style: new TextStyle(
+//                                  color: Colors.grey
+//                                )
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
                       new Container(
                         padding: new EdgeInsets.only(left: 29.0),
                         child: new Align(
@@ -315,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () {
                                 Navigator.push(context,
                                     new MaterialPageRoute(
-                                        builder: (context) => new Centrifuge(data: widget.data,)
+                                        builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
                                     )
                                 );
                               },
@@ -464,7 +505,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       new MaterialPageRoute(
-                                          builder: (context) => new PhotoSpeak(data: widget.data,)
+                                          builder: (context) => new PhotoSpeak(data: widget.data, password: widget.password)
                                       )
                                   );
                                 },
@@ -478,7 +519,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       new MaterialPageRoute(
-                                          builder: (context) => new Attendees(data: widget.data,)
+                                          builder: (context) => new Attendees(data: widget.data, password: widget.password)
                                       )
                                   );
                                 },
@@ -506,7 +547,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       new MaterialPageRoute(
-                                          builder: (context) => new ExtraActivities(data: widget.data)
+                                          builder: (context) => new ExtraActivities(data: widget.data, password: widget.password)
                                       )
                                   );
                                 },
@@ -520,7 +561,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       new MaterialPageRoute(
-                                          builder: (context) => new ConferencePaper()
+                                          builder: (context) => new ConferencePaper(data: widget.data, password: widget.password)
                                       )
                                   );
                                 },
@@ -593,50 +634,90 @@ class _HomePageState extends State<HomePage> {
                 child: new Column(
                   children: <Widget>[
                     Divider(),
+//                      new Container(
+//                        padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
+//                        child: new Row(
+//                          children: <Widget>[
+//                            new Container(
+//                              child: new Text('Technology: ',
+//                                style: new TextStyle(
+//                                  fontWeight: FontWeight.bold,
+//                                  color: Colors.grey
+//                                ),
+//                              ),
+//                            ),
+//                            new Container(
+//                              child: new Text('Java, DevOps',
+//                                style: new TextStyle(
+//                                  color: Colors.grey,
+//                                )
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
                     new Container(
-                      padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                            child: new Text('Technology: ',
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey
-                              ),
-                            ),
-                          ),
-                          new Container(
-                            child: new Text('Java, DevOps',
-                                style: new TextStyle(
-                                  color: Colors.grey,
-                                )
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    new Container(
-                      padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                            child: new Text('Credits: ',
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey
-                              ),
-                            ),
-                          ),
-                          new Container(
-                            child: new Text('Central Bank of Nigeria',
+                      padding: new EdgeInsets.only(left: 29.0),
+                      child: new Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: new FlatButton(
+                            child: new Text('Technology: Java, DevOps',
                                 style: new TextStyle(
                                     color: Colors.grey
                                 )
                             ),
-                          ),
-                        ],
+                            onPressed: () {
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
+                                  )
+                              );
+                            },
+                          )
                       ),
                     ),
+                    new Container(
+                      padding: new EdgeInsets.only(left: 29.0),
+                      child: new Align(
+                          alignment: FractionalOffset.topLeft,
+                          child: new FlatButton(
+                            child: new Text('Credits: Central Bank of Nigeria',
+                                style: new TextStyle(
+                                    color: Colors.grey
+                                )
+                            ),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  new MaterialPageRoute(
+                                      builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
+                                  )
+                              );
+                            },
+                          )
+                      ),
+                    ),
+//                      new Container(
+//                        padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
+//                        child: new Row(
+//                          children: <Widget>[
+//                            new Container(
+//                              child: new Text('Credits: ',
+//                                style: new TextStyle(
+//                                    fontWeight: FontWeight.bold,
+//                                    color: Colors.grey
+//                                ),
+//                              ),
+//                            ),
+//                            new Container(
+//                              child: new Text('Central Bank of Nigeria',
+//                                style: new TextStyle(
+//                                  color: Colors.grey
+//                                )
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
                     new Container(
                       padding: new EdgeInsets.only(left: 29.0),
                       child: new Align(
@@ -650,7 +731,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new Centrifuge(data: widget.data,)
+                                      builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -742,7 +823,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new PhotoSpeak(data: widget.data,)
+                                      builder: (context) => new PhotoSpeak(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -756,7 +837,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new Attendees(data: widget.data,)
+                                      builder: (context) => new Attendees(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -784,7 +865,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new ExtraActivities(data: widget.data)
+                                      builder: (context) => new ExtraActivities(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -798,7 +879,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               Navigator.push(context,
                                   new MaterialPageRoute(
-                                      builder: (context) => new ConferencePaper()
+                                      builder: (context) => new ConferencePaper(data: widget.data, password: widget.password)
                                   )
                               );
                             },
@@ -885,50 +966,90 @@ class _HomePageState extends State<HomePage> {
                   child: new Column(
                     children: <Widget>[
                       Divider(),
+//                      new Container(
+//                        padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
+//                        child: new Row(
+//                          children: <Widget>[
+//                            new Container(
+//                              child: new Text('Technology: ',
+//                                style: new TextStyle(
+//                                  fontWeight: FontWeight.bold,
+//                                  color: Colors.grey
+//                                ),
+//                              ),
+//                            ),
+//                            new Container(
+//                              child: new Text('Java, DevOps',
+//                                style: new TextStyle(
+//                                  color: Colors.grey,
+//                                )
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
                       new Container(
-                        padding: new EdgeInsets.only(left: 45.0, top: 10.0, bottom: 17.0),
-                        child: new Row(
-                          children: <Widget>[
-                            new Container(
-                              child: new Text('Technology: ',
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey
-                                ),
-                              ),
-                            ),
-                            new Container(
-                              child: new Text('Java, DevOps',
-                                  style: new TextStyle(
-                                    color: Colors.grey,
-                                  )
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      new Container(
-                        padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
-                        child: new Row(
-                          children: <Widget>[
-                            new Container(
-                              child: new Text('Credits: ',
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey
-                                ),
-                              ),
-                            ),
-                            new Container(
-                              child: new Text('Central Bank of Nigeria',
+                        padding: new EdgeInsets.only(left: 29.0),
+                        child: new Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: new FlatButton(
+                              child: new Text('Technology: Java, DevOps',
                                   style: new TextStyle(
                                       color: Colors.grey
                                   )
                               ),
-                            ),
-                          ],
+                              onPressed: () {
+                                Navigator.push(context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
+                                    )
+                                );
+                              },
+                            )
                         ),
                       ),
+                      new Container(
+                        padding: new EdgeInsets.only(left: 29.0),
+                        child: new Align(
+                            alignment: FractionalOffset.topLeft,
+                            child: new FlatButton(
+                              child: new Text('Credits: Central Bank of Nigeria',
+                                  style: new TextStyle(
+                                      color: Colors.grey
+                                  )
+                              ),
+                              onPressed: () {
+                                Navigator.push(context,
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
+                                    )
+                                );
+                              },
+                            )
+                        ),
+                      ),
+//                      new Container(
+//                        padding: new EdgeInsets.only(left: 44.0, bottom: 0.0),
+//                        child: new Row(
+//                          children: <Widget>[
+//                            new Container(
+//                              child: new Text('Credits: ',
+//                                style: new TextStyle(
+//                                    fontWeight: FontWeight.bold,
+//                                    color: Colors.grey
+//                                ),
+//                              ),
+//                            ),
+//                            new Container(
+//                              child: new Text('Central Bank of Nigeria',
+//                                style: new TextStyle(
+//                                  color: Colors.grey
+//                                )
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
                       new Container(
                         padding: new EdgeInsets.only(left: 29.0),
                         child: new Align(
@@ -942,7 +1063,7 @@ class _HomePageState extends State<HomePage> {
                               onPressed: () {
                                 Navigator.push(context,
                                     new MaterialPageRoute(
-                                        builder: (context) => new Centrifuge(data: widget.data,)
+                                        builder: (context) => new Centrifuge(data: widget.data, password: widget.password)
                                     )
                                 );
                               },
@@ -1005,7 +1126,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {
                                 Navigator.push (context,
-                                    MaterialPageRoute(builder: (context) => Agenda())
+                                    MaterialPageRoute(builder: (context) => Agenda(data: widget.data, password: widget.password,))
                                 );
                               },
                               child: new Column (
@@ -1036,7 +1157,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {
                                 Navigator.push (context,
-                                    MaterialPageRoute(builder: (context) => Locations())
+                                    MaterialPageRoute(builder: (context) => Locations(data: widget.data, password: widget.password,))
                                 );
                               },
                               child: new Column (
@@ -1065,7 +1186,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {Navigator.push (
                                   context,
-                                  MaterialPageRoute(builder: (context) => NewSpeakers()));},
+                                  MaterialPageRoute(builder: (context) => NewSpeakers(data: widget.data, password: widget.password)));},
                               child: new Column (
                                 children: <Widget> [
                                   new Container(
@@ -1099,7 +1220,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {
                                 Navigator.push (context,
-                                    MaterialPageRoute(builder: (context) => NewExhibitions())
+                                    MaterialPageRoute(builder: (context) => NewExhibitions(data: widget.data, password: widget.password))
                                 );
                               },
                               child: new Column (
@@ -1128,7 +1249,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {
                                 Navigator.push (context,
-                                    MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data,))
+                                    MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data, password: widget.password))
                                 );
                               },
                               child: new Column (
@@ -1156,7 +1277,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             new GestureDetector (
                               onTap: () {Navigator.push (context,
-                                  MaterialPageRoute(builder: (context) => NewPartners()));},
+                                  MaterialPageRoute(builder: (context) => NewPartners(data: widget.data, password: widget.password)));},
                               child: new Column (
                                 children: <Widget> [
                                   new Container(
@@ -1191,7 +1312,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {
                                 Navigator.push (context,
-                                    MaterialPageRoute(builder: (context) => Conference())
+                                    MaterialPageRoute(builder: (context) => Conference(data: widget.data, password: widget.password))
                                 );
                               },
                               child: new Column (
@@ -1225,7 +1346,7 @@ class _HomePageState extends State<HomePage> {
                                 else {
                                   Navigator.push (
                                       context,
-                                      MaterialPageRoute(builder: (context) => NewMessages(data: widget.data))
+                                      MaterialPageRoute(builder: (context) => NewMessages(data: widget.data, password: widget.password))
                                   );
                                 }
                               },
@@ -1256,7 +1377,7 @@ class _HomePageState extends State<HomePage> {
                             new GestureDetector (
                               onTap: () {
                                 Navigator.push (context,
-                                    MaterialPageRoute(builder: (context) => Faq())
+                                    MaterialPageRoute(builder: (context) => Faq(data: widget.data, password: widget.password))
                                 );
                               },
                               child: new Column (
@@ -1451,12 +1572,12 @@ class _HomePageState extends State<HomePage> {
       return new FabMenu(
         menus: [new MenuData(Icons.photo, (context, menuData) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PhotoSpeak(data: widget.data))
+              MaterialPageRoute(builder: (context) => PhotoSpeak(data: widget.data, password: widget.password))
           );
         },labelText: 'Photo Speak'),
           new MenuData(Icons.people, (context, menuData) {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Attendees(data: widget.data,))
+                MaterialPageRoute(builder: (context) => Attendees(data: widget.data, password: widget.password))
             );
           },labelText: 'Join Attendee List'),
           new MenuData(Icons.videocam, (context, menuData) {
@@ -1466,7 +1587,7 @@ class _HomePageState extends State<HomePage> {
           },labelText: 'Join via LiveCam'),
           new MenuData(Icons.forum, (context, menuData) {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data,))
+                MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data, password: widget.password))
             );
           },labelText: 'Chatter Forum'),
           new MenuData(Icons.exit_to_app, (context, menuData) {
@@ -1497,12 +1618,12 @@ class _HomePageState extends State<HomePage> {
       return new FabMenu(
         menus: [new MenuData(Icons.photo, (context, menuData) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PhotoSpeak(data: widget.data))
+              MaterialPageRoute(builder: (context) => PhotoSpeak(data: widget.data, password: widget.password))
           );
         },labelText: 'Photo Speak'),
           new MenuData(Icons.people, (context, menuData) {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Attendees(data: widget.data,))
+                MaterialPageRoute(builder: (context) => Attendees(data: widget.data, password: widget.password))
             );
           },labelText: 'Join Attendee List'),
           new MenuData(Icons.videocam, (context, menuData) {
@@ -1512,7 +1633,7 @@ class _HomePageState extends State<HomePage> {
           },labelText: 'Join via LiveCam'),
           new MenuData(Icons.forum, (context, menuData) {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data,))
+                MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data, password: widget.password))
             );
           },labelText: 'Chatter Forum'),
           new MenuData(Icons.exit_to_app, (context, menuData) {

@@ -16,9 +16,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PartnerRegister extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  PartnerRegister({this.data});
+  PartnerRegister({this.data, this.password});
 
   @override
   _PartnerRegisterState createState() => _PartnerRegisterState();

@@ -25,9 +25,9 @@ void main() {
 
 class ExtraActivities extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  ExtraActivities({this.data});
+  ExtraActivities({this.data, this.password});
 
   @override
   _ExtraActivitiesState createState() => _ExtraActivitiesState();
@@ -96,7 +96,7 @@ class _ExtraActivitiesState extends State<ExtraActivities> {
             new GestureDetector(
               onTap: () {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => Cocktail(data: widget.data,))
+                      MaterialPageRoute(builder: (context) => Cocktail(data: widget.data, password: widget.password))
                   );
               },
               child: new Container (
@@ -137,7 +137,7 @@ class _ExtraActivitiesState extends State<ExtraActivities> {
                   }
                   else {
                     Navigator.push (context,
-                        MaterialPageRoute(builder: (context) => ExhibitionsRegister(data: widget.data))
+                        MaterialPageRoute(builder: (context) => ExhibitionsRegister(data: widget.data, password: widget.password))
                     );
                   }
               },
@@ -179,7 +179,7 @@ class _ExtraActivitiesState extends State<ExtraActivities> {
                 }
                 else {
                   Navigator.push (context,
-                      MaterialPageRoute(builder: (context) => PartnerRegister(data: widget.data))
+                      MaterialPageRoute(builder: (context) => PartnerRegister(data: widget.data, password: widget.password))
                   );
                 }
               },

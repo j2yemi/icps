@@ -22,9 +22,9 @@ import 'package:flutter_rating/flutter_rating.dart';
 
 class NewPartners extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  NewPartners({this.data});
+  NewPartners({this.data, this.password});
 
   @override
   _NewPartnersState createState() => _NewPartnersState();
@@ -174,7 +174,7 @@ class _NewPartnersState extends State<NewPartners> {
                     return new Center(
                         child: new Container(
                           padding: new EdgeInsets.only(top: 35.0),
-                          child: new Text('No Partners here yet',
+                          child: new Text('No Partner here yet',
                             style: new TextStyle(
                               fontSize: ScreenUtil(
                                   allowFontScaling: true)
@@ -199,7 +199,7 @@ class _NewPartnersState extends State<NewPartners> {
                           child: new GestureDetector(
                             onTap: () {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => PartnersProfile(snapshot.data[index], widget.data))
+                                  MaterialPageRoute(builder: (context) => PartnersProfile(partners: snapshot.data[index], data: widget.data, password: widget.password,))
                               );
                             },
 //                            padding: new EdgeInsets.only(left: 5.0, right: 5.0),
@@ -321,7 +321,7 @@ class _NewPartnersState extends State<NewPartners> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -332,13 +332,13 @@ class _NewPartnersState extends State<NewPartners> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }
@@ -379,9 +379,9 @@ class _NewPartnersState extends State<NewPartners> {
 
 class PartnersProfile extends StatefulWidget {
 
-  final Partners partners; Data data;
+  final Partners partners; Data data; String password;
 
-  PartnersProfile(this.partners, this.data);
+  PartnersProfile({this.partners, this.data, this.password});
 
   @override
   _PartnersProfileState createState() => _PartnersProfileState();
@@ -779,7 +779,7 @@ class _PartnersProfileState extends State<PartnersProfile> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -790,13 +790,13 @@ class _PartnersProfileState extends State<PartnersProfile> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }

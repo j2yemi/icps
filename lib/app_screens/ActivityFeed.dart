@@ -33,9 +33,9 @@ void main() {
 
 class ActivityFeed extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  ActivityFeed({this.data});
+  ActivityFeed({this.data, this.password});
 
   @override
   _ActivityFeedState createState() => _ActivityFeedState ();
@@ -632,7 +632,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
   {
     if (choice == Constants.Dashboard){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Dashboard())
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
       );
     }
     else if (choice == Constants.EditProfile){
@@ -643,13 +643,13 @@ class _ActivityFeedState extends State<ActivityFeed> {
       else
       {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EditProfile())
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password))
         );
       }
     }
     else if (choice == Constants.Settings){
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => Settings())
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
       );
     }
   }

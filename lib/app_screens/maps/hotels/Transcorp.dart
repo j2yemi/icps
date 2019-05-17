@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 // import 'package:icps/app_screens/maps/Hotels.dart';
+import 'package:icps/Constants.dart';
+import 'package:icps/app_screens/Register.dart';
+import 'package:icps/app_screens/drawer/Login.dart';
+
+import 'package:icps/app_screens/popupMenu/Dashboard.dart';
+import 'package:icps/app_screens/popupMenu/EditProfile.dart';
+import 'package:icps/app_screens/popupMenu/Settings.dart';
+
 // import 'package:permission_handler/permission_handler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -11,8 +19,19 @@ void main() {
 }
 
 class Transcorp extends StatefulWidget {
+
+  Data data; String password;
+
+  Transcorp({this.data, this.password});
+
   @override
   _TranscorpState createState() => _TranscorpState();
+}
+
+enum AuthStatus {
+  notSignedIn,
+  signedIn,
+  signedInSpeaker
 }
 
 class _TranscorpState extends State<Transcorp>
@@ -31,6 +50,19 @@ class _TranscorpState extends State<Transcorp>
     mapController = controller;
   }
 
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.data = widget.data ?? Data();
+
+    _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +78,22 @@ class _TranscorpState extends State<Transcorp>
           ),
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(
-              Icons.search
-          ),
-            onPressed: () {
-
+//          IconButton(icon: Icon(
+//              Icons.search
+//          ),
+//            onPressed: () {
+//
+//            },
+//          ),
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: new Text(choice),
+                );
+              }).toList();
             },
           ),
         ],
@@ -61,86 +104,63 @@ class _TranscorpState extends State<Transcorp>
       ),
     );
   }
-}
 
-enum PermissionGroup {
-  /// The unknown permission only used for return type, never requested
-  unknown,
+  void choiceAction (String choice)
+  {
+    if (choice == Constants.Dashboard){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
+      );
+    }
+    else if (choice == Constants.EditProfile){
+      if (_authStatus == AuthStatus.notSignedIn)
+      {
+        _showDialog(context);
+      }
+      else
+      {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password,))
+        );
+      }
+    }
+    else if (choice == Constants.Settings){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password,))
+      );
+    }
+  }
 
-  /// Android: Calendar
-  /// iOS: Calendar (Events)
-  calendar,
+  void _showDialog (BuildContext context)
+  {
+    var alertDialog = AlertDialog(
+      title: new Text('Login'),
+      content: new Text('You are not Logged in'),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('Login'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Login()));
+          },
+        ),
+        new FlatButton(
+          child: new Text('Register'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Register()));
+          },
+        ),
+      ],
+    );
 
-  /// Android: Camera
-  /// iOS: Photos (Camera Roll and Camera)
-  camera,
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+//       if (progressString != '100%') {
+        return alertDialog;
 
-  /// Android: Contacts
-  /// iOS: AddressBook
-  contacts,
-
-  /// Android: Fine and Coarse Location
-  /// iOS: CoreLocation (Always and WhenInUse)
-  location,
-
-  /// Android: Microphone
-  /// iOS: Microphone
-  microphone,
-
-  /// Android: Phone
-  /// iOS: Nothing
-  phone,
-
-  /// Android: Nothing
-  /// iOS: Photos
-  photos,
-
-  /// Android: Nothing
-  /// iOS: Reminders
-  reminders,
-
-  /// Android: Body Sensors
-  /// iOS: CoreMotion
-  sensors,
-
-  /// Android: Sms
-  /// iOS: Nothing
-  sms,
-
-  /// Android: External Storage
-  /// iOS: Nothing
-  storage,
-
-  /// Android: Microphone
-  /// iOS: Speech
-  speech,
-
-  /// Android: Fine and Coarse Location
-  /// iOS: CoreLocation - Always
-  locationAlways,
-
-  /// Android: Fine and Coarse Location
-  /// iOS: CoreLocation - WhenInUse
-  locationWhenInUse,
-
-  /// Android: None
-  /// iOS: MPMediaLibrary
-  mediaLibrary
-}
-
-enum PermissionStatus {
-  /// Permission to access the requested feature is denied by the user.
-  denied,
-
-  /// Permissions to access the feature is granted by the user but the feature is disabled.
-  disabled,
-
-  /// Permission to access the requested feature is granted by the user.
-  granted,
-
-  /// The user granted restricted access to the requested feature (only on iOS).
-  restricted,
-
-  /// Permission is in an unknown state
-  unknown
+//       }
+      },
+//        barrierDismissible: false
+    );
+  }
 }
