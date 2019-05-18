@@ -416,6 +416,7 @@ class _RegisterState extends State<Register> {
     if (_form == FormType.login) {
       return new Form(
         key: formKey,
+        autovalidate: _autoValidate,
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -571,6 +572,7 @@ class _RegisterState extends State<Register> {
     } else if (_form == FormType.register) {
       return new Form(
         key: formKey,
+        autovalidate: _autoValidate,
         child: new Column(
           children: <Widget>[
             new Container(
@@ -641,6 +643,7 @@ class _RegisterState extends State<Register> {
     else if (_form == FormType.registerSocial) {
       return new Form(
           key: formKey,
+          autovalidate: _autoValidate,
           child: new Container(
             margin: new EdgeInsets.all(10.0),
             padding: new EdgeInsets.all(10.0),
@@ -924,7 +927,7 @@ class _RegisterState extends State<Register> {
   }
 
   String validationSurname (String value) {
-    Pattern pattern = r'(^[a-zA-Z ])*$';
+    Pattern pattern = r'(^[a-zA-Z -]{1,})$';
 
     RegExp regex = new RegExp(pattern);
 
@@ -937,7 +940,7 @@ class _RegisterState extends State<Register> {
   }
 
   String validationFirstName (String value) {
-    Pattern pattern = r'(^[a-zA-Z ])*$';
+    Pattern pattern = r'(^[a-zA-Z -]{1,})$';
 
     RegExp regex = new RegExp(pattern);
 
@@ -979,9 +982,9 @@ class _RegisterState extends State<Register> {
   }
 
   String validationPhone (String value) {
-    Pattern pattern = r'(^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?'
-        r'[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ '
-        r'\\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+)))?$';
+    Pattern pattern = r'(^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ '
+        r'\\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext'
+        r'\.?|extension|x)[\-\.\ \\\/]?(\d+)))?$';
 
     RegExp regex = new RegExp(pattern);
 
@@ -994,7 +997,7 @@ class _RegisterState extends State<Register> {
   }
 
   String validationOrganisation (String value) {
-    Pattern pattern = r'(^[a-zA-Z ])*$';
+    Pattern pattern = r'(^[a-zA-Z -]{1,})$';
 
     RegExp regex = new RegExp(pattern);
 
@@ -1007,7 +1010,7 @@ class _RegisterState extends State<Register> {
   }
 
   String validationJobTitle (String value) {
-    Pattern pattern = r'(^[a-zA-Z ])*$';
+    Pattern pattern = r'(^[a-zA-Z -]{1,})$';
 
     RegExp regex = new RegExp(pattern);
 
