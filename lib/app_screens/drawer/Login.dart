@@ -333,7 +333,7 @@ class _LoginState extends State<Login> {
               color: Colors.white,
             ),
             onPressed: () {
-              validateAndSubmit(context);
+              validateAndSubmit();
             },
           )
         ],
@@ -350,10 +350,12 @@ class _LoginState extends State<Login> {
               color: Colors.white,
             ),
             onPressed: () {
-              validateAndSave();
-              setState(() {
-                _form = FormType.registerSocial;
-              });
+//              validateAndSave();
+              if (validateAndSave()) {
+                setState(() {
+                  _form = FormType.registerSocial;
+                });
+              }
             },
           )
         ],
@@ -381,7 +383,7 @@ class _LoginState extends State<Login> {
               color: Colors.white,
             ),
             onPressed: () {
-              validateAndSubmit(context);
+              validateAndSubmit();
             },
           ),
         ],
@@ -509,7 +511,7 @@ class _LoginState extends State<Login> {
                             onSaved: (value) => _password = value,
                             onFieldSubmitted: (term){
                               _passwordFocus.unfocus();
-                              validateAndSubmit(context);
+                              validateAndSubmit();
                             },
                           ),
                         ),
@@ -541,7 +543,7 @@ class _LoginState extends State<Login> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    validateAndSubmit(context);
+                                    validateAndSubmit();
                                   }
                                 ),
                                 alignment: Alignment.center,
@@ -772,7 +774,7 @@ class _LoginState extends State<Login> {
                   onSaved: (value) => _shortProfile = value,
                   onFieldSubmitted: (term){
                     _shortProfileFocus.unfocus();
-                    validateAndSubmit(context);
+                    validateAndSubmit();
                   },
                 ),
               ),
@@ -795,7 +797,7 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: () {
-                            validateAndSubmit(context);
+                            validateAndSubmit();
                           }
                       ),
                     ),
@@ -1078,7 +1080,7 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void validateAndSubmit (BuildContext context) async {
+  void validateAndSubmit () async {
     String sendUrl ='http://icps19.com:6060/icps/i/icps/19/urg';
     String findUrl ='http://icps19.com:6060/icps/i/icps/19/urp';
     //print('Form submitted');
@@ -1817,10 +1819,12 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () {
 //                            validateAndSubmit(context);
-                            validateAndSave();
-                            setState(() {
-                              _form = FormType.registerSocial;
-                            });
+//                            validateAndSave();
+                            if (validateAndSave()) {
+                              setState(() {
+                                _form = FormType.registerSocial;
+                              });
+                            }
                           }
                         ),
                       ),
@@ -2147,10 +2151,12 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () {
 //                            validateAndSubmit(context);
-                            validateAndSave();
-                            setState(() {
-                              _form = FormType.registerSocial;
-                            });
+//                            validateAndSave();
+                            if (validateAndSave()) {
+                              setState(() {
+                                _form = FormType.registerSocial;
+                              });
+                            }
                           }
                         ),
                       ),

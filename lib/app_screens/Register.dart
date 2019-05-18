@@ -353,10 +353,12 @@ class _RegisterState extends State<Register> {
               color: Colors.white,
             ),
             onPressed: () {
-              validateAndSave();
-              setState(() {
-                _form = FormType.registerSocial;
-              });
+//              validateAndSave();
+              if(validateAndSave()) {
+                setState(() {
+                  _form = FormType.registerSocial;
+                });
+              }
             },
           )
         ],
@@ -1817,10 +1819,12 @@ class _RegisterState extends State<Register> {
                             ),
                             onPressed: () {
 //                            validateAndSubmit(context);
-                              validateAndSave();
-                              setState(() {
-                                _form = FormType.registerSocial;
-                              });
+//                              validateAndSave();
+                              if (validateAndSave()) {
+                                setState(() {
+                                  _form = FormType.registerSocial;
+                                });
+                              }
                             }
                         ),
                       ),
@@ -2147,10 +2151,12 @@ class _RegisterState extends State<Register> {
                             ),
                             onPressed: () {
 //                            validateAndSubmit(context);
-                              validateAndSave();
-                              setState(() {
-                                _form = FormType.registerSocial;
-                              });
+//                              validateAndSave();
+                              if (validateAndSave()) {
+                                setState(() {
+                                  _form = FormType.registerSocial;
+                                });
+                              }
                             }
                         ),
                       ),

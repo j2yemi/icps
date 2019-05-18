@@ -226,15 +226,15 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                                 fit: BoxFit.cover
                                             ),
                                           ),
-                                          child: new CircleAvatar(
-                                            radius: 50.0,
-                                            child: new Text('${snapshot.data[index].surname.substring(0, 1)}'
-                                                '${snapshot.data[index].firstname.substring(0, 1)}',
-                                              style: new TextStyle(
-                                                  fontSize: 43.0
-                                              ),
-                                            ),
-                                          )
+//                                          child: new CircleAvatar(
+//                                            radius: 50.0,
+//                                            child: new Text('${snapshot.data[index].surname.substring(0, 1)}'
+//                                                '${snapshot.data[index].firstname.substring(0, 1)}',
+//                                              style: new TextStyle(
+//                                                  fontSize: 43.0
+//                                              ),
+//                                            ),
+//                                          )
                                         ),
                                         new Container(
                                           width: MediaQuery.of(context).size.width,
