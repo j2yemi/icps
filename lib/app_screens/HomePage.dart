@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Drawer _buildDrawer (context) {
-//    _getProfile();
+    _getProfile();
     switch (_authStatus) {
       case AuthStatus.notSignedIn:
         return new Drawer(
