@@ -648,7 +648,7 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                           ),
                         ),
                         new SizedBox(
-                          height: ScreenUtil.getInstance().setHeight(435),
+                          height: ScreenUtil.getInstance().setHeight(595),
                         )
                       ],
                     ),
@@ -658,8 +658,8 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                     left: 20.0,
                     child: new Column(
                       children: <Widget>[
-                        new Container(
-                            height: ScreenUtil.getInstance().setHeight(480)
+                        new SizedBox(
+                            height: ScreenUtil.getInstance().setHeight(670)
                         ),
                         new Card(
                           shape: RoundedRectangleBorder(

@@ -540,7 +540,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                           ),
                         ),
                         new SizedBox(
-                          height: ScreenUtil.getInstance().setHeight(435),
+                          height: ScreenUtil.getInstance().setHeight(595),
                         )
                       ],
                     ),
@@ -550,8 +550,8 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                     left: 20.0,
                     child: new Column(
                       children: <Widget>[
-                        new Container(
-                          height: ScreenUtil.getInstance().setHeight(480)
+                        new SizedBox(
+                          height: ScreenUtil.getInstance().setHeight(670)
                         ),
                         new Card(
                           shape: RoundedRectangleBorder(
