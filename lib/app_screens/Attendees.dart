@@ -654,45 +654,50 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                     ),
                   ),
                   new Positioned(
-                    top: 290.0,
+                    top: 0.0,
                     left: 20.0,
-                    child: new Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: new Container(
-                        padding: new EdgeInsets.all(25.0),
-                        width: ScreenUtil.getInstance().setWidth(680),
+                    child: new Column(
+                      children: <Widget>[
+                        new Container(
+                            height: ScreenUtil.getInstance().setHeight(480)
+                        ),
+                        new Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: new Container(
+                            padding: new EdgeInsets.all(25.0),
+                            width: ScreenUtil.getInstance().setWidth(680),
 //                        decoration: new BoxDecoration(
 //                          color: Colors.white,
 //                          borderRadius: new BorderRadius.circular(20.0),
 //                        ),
-                        child: new Column(
-                          children: <Widget>[
-                            new Container(
-                              child: new Text('${widget.joinAttendee.usersInfo.title} ${widget.joinAttendee.usersInfo.surname} ${widget.joinAttendee.usersInfo.firstname}',
-                                style: new TextStyle(
-                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(46),
-                                    fontWeight: FontWeight.bold
+                            child: new Column(
+                              children: <Widget>[
+                                new Container(
+                                  child: new Text('${widget.joinAttendee.usersInfo.title} ${widget.joinAttendee.usersInfo.surname} ${widget.joinAttendee.usersInfo.firstname}',
+                                    style: new TextStyle(
+                                        fontSize: ScreenUtil(allowFontScaling: true).setSp(46),
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            widget.joinAttendee.usersInfo.shortProfile == null ?
-                            new Center() :
-                            new Container(
-                              padding: new EdgeInsets.only(top: 18.0, bottom: 15.0),
-                              width: ScreenUtil.getInstance().setWidth(550),
-                              child: new Text('${widget.joinAttendee.usersInfo.shortProfile}',
-                                style: new TextStyle(
-                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
-                                    color: Colors.grey
+                                widget.joinAttendee.usersInfo.shortProfile == null ?
+                                new Center() :
+                                new Container(
+                                  padding: new EdgeInsets.only(top: 18.0, bottom: 15.0),
+                                  width: ScreenUtil.getInstance().setWidth(550),
+                                  child: new Text('${widget.joinAttendee.usersInfo.shortProfile}',
+                                    style: new TextStyle(
+                                        fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
+                                        color: Colors.grey
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            new Center (
-                                child: new Container(
+                                new Center (
+                                    child: new Container(
 //                                  padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                                    width: MediaQuery.of(context).size.width,
+                                        width: MediaQuery.of(context).size.width,
 //                                  decoration: new BoxDecoration(
 //                                      border: new Border(
 //                                          bottom: new BorderSide(
@@ -702,33 +707,33 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
 //                                          )
 //                                      )
 //                                  ),
-                                    child: new Row(
+                                        child: new Row(
 //                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        new Container(
-                                            padding: new EdgeInsets.only(left: 9.0, right: 10.0),
-                                            child: new Icon(
-                                                Icons.business_center
-                                            )
-                                        ),
-                                        new Container(
-                                          width: ScreenUtil.getInstance().setWidth(500),
-                                          child: new Text('${widget.joinAttendee.usersInfo.workPosition}, ${widget.joinAttendee.usersInfo.organisation}',
-                                            style: new TextStyle(
-                                                fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                          children: <Widget>[
+                                            new Container(
+                                                padding: new EdgeInsets.only(left: 9.0, right: 10.0),
+                                                child: new Icon(
+                                                    Icons.business_center
+                                                )
                                             ),
-                                          ),
+                                            new Container(
+                                              width: ScreenUtil.getInstance().setWidth(500),
+                                              child: new Text('${widget.joinAttendee.usersInfo.workPosition}, ${widget.joinAttendee.usersInfo.organisation}',
+                                                style: new TextStyle(
+                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         )
-                                      ],
                                     )
-                                )
-                            ),
-                            widget.joinAttendee.usersInfo.facebookId == null ?
-                            new Center() :
-                            new Center (
-                                child: new Container(
-                                    padding: new EdgeInsets.only(top: 10.0, bottom: 10.0),
-                                    width: MediaQuery.of(context).size.width,
+                                ),
+                                widget.joinAttendee.usersInfo.facebookId == null ?
+                                new Center() :
+                                new Center (
+                                    child: new Container(
+                                        padding: new EdgeInsets.only(top: 10.0, bottom: 10.0),
+                                        width: MediaQuery.of(context).size.width,
 //                                    decoration: new BoxDecoration(
 //                                        border: new Border(
 //                                            bottom: new BorderSide(
@@ -738,33 +743,33 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
 //                                            )
 //                                        )
 //                                    ),
-                                    child: new Row(
+                                        child: new Row(
 //                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        new Container(
-                                            padding: new EdgeInsets.only(left: 9.0, right: 10.0),
-                                            child: new Icon(
-                                                FontAwesomeIcons.facebook
-                                            )
-                                        ),
-                                        new Container(
-                                          width: ScreenUtil.getInstance().setWidth(500),
-                                          child: new Text('${widget.joinAttendee.usersInfo.facebookId}',
-                                            style: new TextStyle(
-                                                fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                          children: <Widget>[
+                                            new Container(
+                                                padding: new EdgeInsets.only(left: 9.0, right: 10.0),
+                                                child: new Icon(
+                                                    FontAwesomeIcons.facebook
+                                                )
                                             ),
-                                          ),
+                                            new Container(
+                                              width: ScreenUtil.getInstance().setWidth(500),
+                                              child: new Text('${widget.joinAttendee.usersInfo.facebookId}',
+                                                style: new TextStyle(
+                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         )
-                                      ],
                                     )
-                                )
-                            ),
-                            widget.joinAttendee.usersInfo.twitterId == null ?
-                            new Center() :
-                            new Center (
-                                child: new Container(
+                                ),
+                                widget.joinAttendee.usersInfo.twitterId == null ?
+                                new Center() :
+                                new Center (
+                                    child: new Container(
 //                                    padding: new EdgeInsets.only(top: 30.0, bottom: 30.0),
-                                    width: MediaQuery.of(context).size.width,
+                                        width: MediaQuery.of(context).size.width,
 //                                    decoration: new BoxDecoration(
 //                                        border: new Border(
 //                                            bottom: new BorderSide(
@@ -774,31 +779,33 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
 //                                            )
 //                                        )
 //                                    ),
-                                    child: new Row(
+                                        child: new Row(
 //                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        new Container(
-                                            padding: new EdgeInsets.only(left: 9.0, right: 10.0),
-                                            child: new Icon(
-                                                FontAwesomeIcons.twitter
-                                            )
-                                        ),
-                                        new Container(
-                                          width: ScreenUtil.getInstance().setWidth(500),
-                                          child: new Text('${widget.joinAttendee.usersInfo.twitterId}',
-                                            style: new TextStyle(
-                                                fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                          children: <Widget>[
+                                            new Container(
+                                                padding: new EdgeInsets.only(left: 9.0, right: 10.0),
+                                                child: new Icon(
+                                                    FontAwesomeIcons.twitter
+                                                )
                                             ),
-                                          ),
+                                            new Container(
+                                              width: ScreenUtil.getInstance().setWidth(500),
+                                              child: new Text('${widget.joinAttendee.usersInfo.twitterId}',
+                                                style: new TextStyle(
+                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(27)
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         )
-                                      ],
                                     )
-                                )
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
+                      ],
+                    )
                   ),
                 ],
               ),
