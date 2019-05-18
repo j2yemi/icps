@@ -348,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                         child: new Align(
                           alignment: FractionalOffset.topLeft,
                             child: new FlatButton(
-                              child: new Text('Developed by Centrifuge Group',
+                              child: new Text('Developer: Centrifuge Group',
                                   style: new TextStyle(
                                       color: Colors.grey
                                   )
@@ -723,7 +723,7 @@ class _HomePageState extends State<HomePage> {
                       child: new Align(
                           alignment: FractionalOffset.topLeft,
                           child: new FlatButton(
-                            child: new Text('Developed by Centrifuge Group',
+                            child: new Text('Developer: Centrifuge Group',
                                 style: new TextStyle(
                                     color: Colors.grey
                                 )
@@ -1055,7 +1055,7 @@ class _HomePageState extends State<HomePage> {
                         child: new Align(
                             alignment: FractionalOffset.topLeft,
                             child: new FlatButton(
-                              child: new Text('Developed by Centrifuge Group',
+                              child: new Text('Developer: Centrifuge Group',
                                   style: new TextStyle(
                                       color: Colors.grey
                                   )
