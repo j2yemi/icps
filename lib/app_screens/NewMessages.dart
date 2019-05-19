@@ -15,7 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:icps/app_screens/activity_feed/NewFeed.dart';
 import 'dart:io';
-import 'dart:convert';
+//import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
@@ -89,9 +89,9 @@ class _NewMessagesState extends State<NewMessages> {
 
   Future <List<MyMessages>> _getMessages() async {
 
-    List<MyMessages> myMessagesFromJson(String str) => new List<MyMessages>.from(json.decode(str).map((x) => MyMessages.fromJson(x)));
-
-    String myMessagesToJson(List<MyMessages> data) => json.encode(new List<dynamic>.from(data.map((x) => x.toJson())));
+//    List<MyMessages> myMessagesFromJson(String str) => new List<MyMessages>.from(json.decode(str).map((x) => MyMessages.fromJson(x)));
+//
+//    String myMessagesToJson(List<MyMessages> data) => json.encode(new List<dynamic>.from(data.map((x) => x.toJson())));
 
     String getUrl = 'http://icps19.com:6060/icps/icps/19/msl';
 
@@ -318,6 +318,7 @@ class _NewMessagesState extends State<NewMessages> {
                                         return new Card(
                                           child: new GestureDetector(
                                             onTap: () {
+                                              _readMessage(snapshot.data[index].id);
                                               Navigator.push (context,
                                                   MaterialPageRoute(builder: (context) => MessageDetails(snapshot.data[index], widget.data))
                                               );
@@ -507,6 +508,59 @@ class _NewMessagesState extends State<NewMessages> {
         setState(() {
           _getMessages();
         });
+      }
+    }
+
+    void _readMessage(id) async {
+      final String url = 'http://icps19.com:6060/icps/icps/19/msu';
+
+      try {
+        Response response;
+        Dio dio = new Dio();
+
+//        _generateConfirmationCode();
+
+//        print('code:' + confirmationCode);
+
+        response = await dio.put(url, queryParameters: {
+          "id": id,
+          "messageread": true
+        },
+            options: Options(
+              headers: {
+                HttpHeaders.contentTypeHeader: 'application/json',
+                "accept": "application/json"
+              },)
+        );
+
+        if (response.statusCode == 200) {
+          print('Message read');
+//          Fluttertoast.showToast(
+//              msg: "Message read",
+//              toastLength: Toast.LENGTH_LONG,
+//              gravity: ToastGravity.BOTTOM,
+//              timeInSecForIos: 1,
+//              backgroundColor: Colors.black,
+//              textColor: Colors.white,
+//              fontSize: 16.0
+//          );
+        }
+        else {
+          print('Message read failed');
+//          Fluttertoast.showToast(
+//              msg: "Message read failed",
+//              toastLength: Toast.LENGTH_LONG,
+//              gravity: ToastGravity.BOTTOM,
+//              timeInSecForIos: 1,
+//              backgroundColor: Colors.black,
+//              textColor: Colors.white,
+//              fontSize: 16.0
+//          );
+        }
+      }
+      catch(e)
+      {
+        print('Error: $e');
       }
     }
 
@@ -871,10 +925,10 @@ class _MessageDetailsState extends State<MessageDetails> {
     );
   }
 
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
+//  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+//    currentFocus.unfocus();
+//    FocusScope.of(context).requestFocus(nextFocus);
+//  }
 
   bool validateAndSave () {
     final form = formKey.currentState;

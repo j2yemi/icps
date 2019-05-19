@@ -1,7 +1,12 @@
 //import 'package:date_format/date_format.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:icps/Constants.dart';
+import 'package:icps/MessagesJson.dart';
 import 'package:icps/app_screens/Centrifuge.dart';
 import 'package:icps/app_screens/NewExhibitions.dart';
 import 'package:icps/app_screens/NewMessages.dart';
@@ -88,6 +93,10 @@ class _HomePageState extends State<HomePage> {
 
   var user = Data();
 
+  List mData = new List();
+
+  var mReadLength = 0;
+
   @override
   initState() {
     super.initState();
@@ -108,11 +117,16 @@ class _HomePageState extends State<HomePage> {
     widget.data = widget.data == null && widget.data2 != null ? widget.data2 : widget.data == null && widget.data2 == null ? Data() : widget.data;
    _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
 
-   _getProfile();
+   this._getProfile();
+
+   this._getMessages();
+
+//   this.searchById();
   }
 
   Drawer _buildDrawer (context) {
     _getProfile();
+  _getMessages();
     switch (_authStatus) {
       case AuthStatus.notSignedIn:
         return new Drawer(
@@ -1352,20 +1366,51 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: new Column (
                                 children: <Widget> [
-                                  new Container(
-                                    width: ScreenUtil.getInstance().setWidth(135),
-                                    height: ScreenUtil.getInstance().setHeight(135),
-                                    decoration: BoxDecoration(
-                                        image: new DecorationImage(
-                                            image: new AssetImage(
-                                                'assets/images/icons/messages.png'
+                                  new Stack(
+                                    children: <Widget>[
+                                      new Container(
+                                        width: ScreenUtil.getInstance().setWidth(135),
+                                        height: ScreenUtil.getInstance().setHeight(135),
+                                        decoration: BoxDecoration(
+                                            image: new DecorationImage(
+                                                image: new AssetImage(
+                                                    'assets/images/icons/messages.png'
+                                                )
                                             )
-                                        )
 
-                                    ),
+                                        ),
 //                            child: new Center (
 //                              child: new Icon(Icons.feedback ),
 //                            ),
+                                      ),
+                                      widget.data.id == 0 ?
+                                      new Container() :
+                                      new Positioned(
+                                        bottom: 10.0,
+                                        right: 3.0,
+                                        child: new Container(
+                                          width: ScreenUtil.getInstance().setWidth(35),
+                                          height: ScreenUtil.getInstance().setHeight(35),
+                                          decoration: BoxDecoration(
+                                              borderRadius: new BorderRadius.circular(15.0),
+                                              color: Colors.redAccent
+                                          ),
+                                          child: new Center(
+                                            child: new Container(
+                                              child: new Text('$mReadLength',
+                                                style: new TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14.0
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+//                            child: new Center (
+//                              child: new Icon(Icons.feedback ),
+//                            ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                   Padding (padding: EdgeInsets.only(top: 6.0)),
                                   new Container(
@@ -1559,6 +1604,91 @@ class _HomePageState extends State<HomePage> {
         drawer: _buildDrawer(context),
     );
   }
+
+  Future <String> _getMessages() async {
+
+    String getUrl = 'http://icps19.com:6060/icps/icps/19/msl';
+
+    var messagesData = await http
+        .get(Uri.encodeFull(getUrl), headers: {"Accept": "application/json"});
+
+    var jsonData = messagesData.body;
+    print(jsonData);
+    print('get');
+
+    var resBody = json.decode(jsonData);
+
+//    setState(() {
+//      mData = resBody;
+////      mRead = mData.where((id) { if (id["m_to"] == widget.data.id) { return id["messageread"] == false; } } );
+//    });
+
+    List <MyMessages> myMessages = myMessagesFromJson(jsonData);
+    print('get2');
+    List <MyMessages> message = [];
+
+//    searchMessageRead();
+
+    print(resBody);
+
+    try
+    {
+      for (MyMessages ss in myMessages)
+      {
+        if (ss.mTo == widget.data.id)
+        {
+          if (ss.messageread == false) {
+
+            MyMessages receiveMessages = MyMessages (
+                id: ss.id,
+                mFrom: ss.mFrom,
+                mMessage: ss.mMessage,
+                mTo: ss.mTo,
+                messagedate: ss.messagedate,
+                messageread: ss.messageread,
+                sentToInfo: ss.sentToInfo,
+                userinfoid: ss.userinfoid,
+                usersInfo: ss.usersInfo,
+                messageType: 'R'
+            );
+            message.add(receiveMessages);
+          }
+        }
+      }
+    }
+    catch(e)
+    {
+      print('Error: $e');
+    }
+
+//    print('this ths: ${mRead.length}');
+
+    setState(() {
+      mReadLength = message.length;
+    });
+
+    return 'Success';
+  }
+
+//  void searchMessageRead() {
+//
+//    var mRead;
+//
+//    mRead = mData.where((id) { if (id["m_to"] == widget.data.id) return id["messageread"] == false;});
+//
+////    for (var ss in mData) {
+////      if (ss["m_to"] == widget.data.id)
+////      {
+////        mRead = mData.where((id) => id["messageread"] == false);
+////      }
+////    }
+//
+//    setState(() {
+//      mReadLength = mRead.length;
+//    });
+////    print('this ths: ${mRead.length}');
+//
+//  }
 
   Widget _buildFab (BuildContext context) {
     if (_authStatus == AuthStatus.signedIn)
