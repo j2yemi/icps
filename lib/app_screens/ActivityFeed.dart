@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icps/ActivityFeedJson.dart';
 // import 'package:icps/app_screens/HomePage.dart';
-import 'package:icps/AttendeeJson.dart';
+//import 'package:icps/AttendeeJson.dart';
 import 'package:icps/Constants.dart';
 import 'package:icps/app_screens/Register.dart';
 import 'package:icps/app_screens/drawer/Login.dart';
@@ -16,7 +16,7 @@ import 'dart:math' as math;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io';
-import 'dart:convert';
+//import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
@@ -86,6 +86,8 @@ class _ActivityFeedState extends State<ActivityFeed> {
     controller = new ScrollController()..addListener(_scrollListener);
 
     refreshList();
+
+    this._getQuestions();
   }
 
   @override
