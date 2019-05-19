@@ -389,7 +389,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
                               AsyncSnapshot snapshot) {
                             if (snapshot.data == null) {
                               return new Container(
-                                padding: new EdgeInsets.only(top: 225.0),
+                                padding: new EdgeInsets.only(top: 125.0),
                                 child: new Center(
                                   child: CircularProgressIndicator(),
                                 ),
@@ -594,6 +594,9 @@ class _ActivityFeedState extends State<ActivityFeed> {
         print(_question);
         print(widget.data.surname);
 
+//        _getQuestions();
+//        refreshList();
+
         Fluttertoast.showToast(
             msg: "Question Submitted",
             toastLength: Toast.LENGTH_LONG,
@@ -635,6 +638,8 @@ class _ActivityFeedState extends State<ActivityFeed> {
 
 //        print(_to);
 //      print(_question);
+      _getQuestions();
+      refreshList();
       print(widget.data.surname);
 
       Fluttertoast.showToast(
