@@ -729,7 +729,7 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                                         )
                                     )
                                 ),
-                                widget.joinAttendee.usersInfo.facebookId == null ?
+                                widget.joinAttendee.usersInfo.facebookId == null || widget.joinAttendee.usersInfo.facebookId == '' ?
                                 new Center() :
                                 new Center (
                                     child: new Container(
@@ -765,7 +765,7 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                                         )
                                     )
                                 ),
-                                widget.joinAttendee.usersInfo.twitterId == null ?
+                                widget.joinAttendee.usersInfo.twitterId == null || widget.joinAttendee.usersInfo.twitterId == '' ?
                                 new Center() :
                                 new Center (
                                     child: new Container(
