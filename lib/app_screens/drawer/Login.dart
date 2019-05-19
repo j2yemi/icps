@@ -2185,6 +2185,9 @@ class _LoginState extends State<Login> {
       String sendUrl ='http://icps19.com:6060/icps/i/icps/19/urg';
       _showDialog(context, 'Registering');
 
+      var lusername = _username;
+      var lpassword = _password;
+
       response = await dio.post(sendUrl, queryParameters: {
         "companysector": _currentCompanySectorSelected,
         "conference_id": confirmationCode,
@@ -2233,7 +2236,7 @@ class _LoginState extends State<Login> {
         );
 //            Toast.show("Oops, something went wrong, try again.", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
       }
-      else {
+      else if (response.statusCode == 200){
         Fluttertoast.showToast(
             msg: "Account created successfully, please wait",
             toastLength: Toast.LENGTH_LONG,
@@ -2243,6 +2246,8 @@ class _LoginState extends State<Login> {
             textColor: Colors.white,
             fontSize: 16.0
         );
+
+
 
         Future.delayed(Duration(seconds: 0),
                 () async {
@@ -2258,27 +2263,33 @@ class _LoginState extends State<Login> {
 
               Future.delayed(Duration(seconds: 2),
                       () async {
-                    String findUrl = 'http://icps19.com:6060/icps/i/icps/19/urp';
-                    dio.options.connectTimeout = 50000;
-                    response = await dio.get(findUrl, queryParameters: {
-                      "username": _username,
-                      "password": _password
-                    });
-                    print(response.statusCode);
+                        _showDialog(context, 'Logging In');
 
-                    Navigator.pop(context, (response.statusCode == 200 ||
-                        response.statusCode == 401));
+//        _login();
+                        String findUrl = 'http://icps19.com:6060/icps/i/icps/19/urp';
 
-                    if (response.statusCode == 200) {
-                      print(UsersInfo
-                          .fromJson(response.data)
-                          .surname);
-                      print(UsersInfo
-                          .fromJson(response.data)
-                          .speakerYn);
-                      print(UsersInfo
-                          .fromJson(response.data)
-                          .workPosition);
+                        Response response2;
+                        Dio dio2 = new Dio();
+                        dio.options.connectTimeout = 50000;
+                        response2 = await dio2.get(findUrl, queryParameters: {
+                          "username": lusername,
+                          "password": lpassword
+                        });
+                        print(response2.statusCode);
+
+                        Navigator.pop(context, (response2.statusCode == 200 ||
+                            response2.statusCode == 401));
+
+                        if (response2.statusCode == 200) {
+                          print(UsersInfo
+                              .fromJson(response2.data)
+                              .surname);
+                          print(UsersInfo
+                              .fromJson(response2.data)
+                              .speakerYn);
+                          print(UsersInfo
+                              .fromJson(response2.data)
+                              .workPosition);
 
 //            userSurname = UsersInfo.fromJson(response.data).surname;
 //
@@ -2289,59 +2300,59 @@ class _LoginState extends State<Login> {
 //              firstname: userFirstname
 //            );
 
-                      var data = Data.fromUsersInfo(
-                          UsersInfo.fromJson(response.data));
+                          var data = Data.fromUsersInfo(
+                              UsersInfo.fromJson(response2.data));
 
-                      Fluttertoast.showToast(
-                          msg: "Login successful, please wait",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIos: 6,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white,
-                          fontSize: 16.0
-                      );
+                          Fluttertoast.showToast(
+                              msg: "Login successful, please wait",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIos: 6,
+                              backgroundColor: Colors.black,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
 
-                      Future.delayed(Duration(seconds: 3),
-                              () async {
-                            Fluttertoast.showToast(
-                                msg: "Redirecting",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIos: 6,
-                                backgroundColor: Colors.black,
-                                textColor: Colors.white,
-                                fontSize: 16.0
-                            );
+                          Future.delayed(Duration(seconds: 3),
+                                  () async {
+                                Fluttertoast.showToast(
+                                    msg: "Redirecting",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIos: 6,
+                                    backgroundColor: Colors.black,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0
+                                );
 
-                            Future.delayed(Duration(seconds: 2),
-                                    () async {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) =>
-                                          HomePage(
-                                              data: data, password: _password))
-                                  );
-                                  print('5 seconds');
-                                }
-                            );
-                          }
-                      );
-                    }
-                    else if (response.statusCode == 401) {
-                      print('Something went wrong $response.statusCode');
+                                Future.delayed(Duration(seconds: 2),
+                                        () async {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) =>
+                                              HomePage(
+                                                  data: data, password: _password))
+                                      );
+                                      print('5 seconds');
+                                    }
+                                );
+                              }
+                          );
+                        }
+                        else if (response2.statusCode == 401) {
+                          print('Something went wrong ${response2.statusCode}');
 
-                      Fluttertoast.showToast(
-                          msg: "Something went wrong $response.statusCode",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIos: 1,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white,
-                          fontSize: 16.0
-                      );
+                          Fluttertoast.showToast(
+                              msg: "Something went wrong ${response2.statusCode}",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIos: 1,
+                              backgroundColor: Colors.black,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
 
 //            Toast.show("Something went wrong $response.statusCode", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                    }
+                        }
                     print('5 seconds');
                   }
               );
@@ -2396,6 +2407,96 @@ class _LoginState extends State<Login> {
     setState(() {
       this._currentCountrySelected = newValueSelected;
     });
+  }
+
+  void _login() async {
+    String findUrl = 'http://icps19.com:6060/icps/i/icps/19/urp';
+
+    Response response;
+    Dio dio;
+    dio.options.connectTimeout = 50000;
+    response = await dio.get(findUrl, queryParameters: {
+      "username": _username,
+      "password": _password
+    });
+    print(response.statusCode);
+
+    Navigator.pop(context, (response.statusCode == 200 ||
+        response.statusCode == 401));
+
+    if (response.statusCode == 200) {
+      print(UsersInfo
+          .fromJson(response.data)
+          .surname);
+      print(UsersInfo
+          .fromJson(response.data)
+          .speakerYn);
+      print(UsersInfo
+          .fromJson(response.data)
+          .workPosition);
+
+//            userSurname = UsersInfo.fromJson(response.data).surname;
+//
+//            userFirstname = UsersInfo.fromJson(response.data).firstname;
+//
+//            var data = Data (
+//              surname: userSurname,
+//              firstname: userFirstname
+//            );
+
+      var data = Data.fromUsersInfo(
+          UsersInfo.fromJson(response.data));
+
+      Fluttertoast.showToast(
+          msg: "Login successful, please wait",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 6,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+
+      Future.delayed(Duration(seconds: 3),
+              () async {
+            Fluttertoast.showToast(
+                msg: "Redirecting",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 6,
+                backgroundColor: Colors.black,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+
+            Future.delayed(Duration(seconds: 2),
+                    () async {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) =>
+                          HomePage(
+                              data: data, password: _password))
+                  );
+                  print('5 seconds');
+                }
+            );
+          }
+      );
+    }
+    else if (response.statusCode == 401) {
+      print('Something went wrong $response.statusCode');
+
+      Fluttertoast.showToast(
+          msg: "Something went wrong $response.statusCode",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+
+//            Toast.show("Something went wrong $response.statusCode", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    }
   }
 
   void _showDialog (BuildContext context, String formProcess)

@@ -473,7 +473,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
                                                       _showDialogTwo(context);
                                                     }
                                                     else {
-
+                                                      _voteQuestion(snapshot.data[index].qid, widget.data.id);
                                                     }
                                                   },
                                                   child: new Center(
@@ -617,6 +617,47 @@ class _ActivityFeedState extends State<ActivityFeed> {
       print('Got response here as $response.statusCode');
 
     }
+  }
+
+  void _voteQuestion (questionid, votebyid) async {
+    final String url = 'http://icps19.com:6060/icps/icps/19/vsk';
+
+    Response response;
+    Dio dio = new Dio();
+    response = await dio.post(url, queryParameters: {"questionid": questionid,"votebyid":votebyid},
+        options: Options(
+          headers: {HttpHeaders.contentTypeHeader: 'application/json',"accept": "application/json"},)
+    );
+
+    if(response.statusCode == 200){
+
+//        print(_to);
+//      print(_question);
+      print(widget.data.surname);
+
+      Fluttertoast.showToast(
+          msg: "Vote Submitted",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 6,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
+    else {
+      Fluttertoast.showToast(
+          msg: "Oops, something went wrong, try again.",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIos: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
+
+    print('Got response here as $response.statusCode');
   }
 
   void _scrollListener() {
