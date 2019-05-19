@@ -52,6 +52,8 @@ class _NewMessagesState extends State<NewMessages> {
 
   AuthStatus _authStatus = AuthStatus.notSignedIn;
 
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+
   String url = 'http://icps19.com:6060/icps/resources/conferencepresentations/profilepics/';
 
   @override
@@ -63,7 +65,7 @@ class _NewMessagesState extends State<NewMessages> {
 
     _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
 
-//    refreshList();
+    refreshList();
 
     controller = new ScrollController()..addListener(_scrollListener);
   }
@@ -72,6 +74,17 @@ class _NewMessagesState extends State<NewMessages> {
   void dispose() {
     controller.removeListener(_scrollListener);
     super.dispose();
+  }
+
+  Future<Null> refreshList() async {
+    refreshKey.currentState?.show();
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {
+      _getMessages();
+    });
+
+    return null;
   }
 
   Future <List<MyMessages>> _getMessages() async {
@@ -259,65 +272,67 @@ class _NewMessagesState extends State<NewMessages> {
             },
             backgroundColor: Color.fromRGBO(152, 160, 87, 1),
           ),
-          body: new SingleChildScrollView(
-              child: new Column(
-                  children: <Widget>[
-                    new Container(
-                      margin: new EdgeInsets.only(
-                          top: 20.0, left: 10.0, right: 10.0, bottom: 20.0),
-                      child: new FutureBuilder(
-                          future: _getMessages(),
-                          builder: (BuildContext context,
-                              AsyncSnapshot snapshot) {
-                            if (snapshot.data == null) {
-                              return new Container(
-                                padding: new EdgeInsets.only(top: 225.0),
-                                child: new Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            }
-                            else if (snapshot.data.length == 0) {
-                              return new Center(
-                                child: new Container(
-                                  padding: new EdgeInsets.only(top: 35.0),
-                                  child: new Text('No Message here yet',
-                                    style: new TextStyle(
-                                      fontSize: ScreenUtil(
-                                          allowFontScaling: true)
-                                          .setSp(31),
-                                    ),
+          body: new RefreshIndicator(
+            onRefresh: refreshList,
+            child: new SingleChildScrollView(
+                child: new Column(
+                    children: <Widget>[
+                      new Container(
+                        margin: new EdgeInsets.only(
+                            top: 20.0, left: 10.0, right: 10.0, bottom: 20.0),
+                        child: new FutureBuilder(
+                            future: _getMessages(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot snapshot) {
+                              if (snapshot.data == null) {
+                                return new Container(
+                                  padding: new EdgeInsets.only(top: 225.0),
+                                  child: new Center(
+                                    child: CircularProgressIndicator(),
                                   ),
-                                )
-                              );
-                            }
-                            else {
-                              return ListView.builder(
-                                  controller: controller,
-                                  shrinkWrap: true,
-                                  physics: const ClampingScrollPhysics(),
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (BuildContext context,
-                                      int index) {
-                                    if (snapshot.data[index].mTo == widget.data.id) {
-                                      return new Card(
-                                        child: new GestureDetector(
-                                          onTap: () {
-                                            Navigator.push (context,
-                                                MaterialPageRoute(builder: (context) => MessageDetails(snapshot.data[index], widget.data))
-                                            );
-                                          },
-                                          child: new Container(
-                                            padding: new EdgeInsets.all(10.0),
-                                            child: new Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: <Widget>[
-                                                  new Container(
-                                                    child: new Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: <Widget>[
-                                                        new Container(
+                                );
+                              }
+                              else if (snapshot.data.length == 0) {
+                                return new Center(
+                                    child: new Container(
+                                      padding: new EdgeInsets.only(top: 35.0),
+                                      child: new Text('No Message here yet',
+                                        style: new TextStyle(
+                                          fontSize: ScreenUtil(
+                                              allowFontScaling: true)
+                                              .setSp(31),
+                                        ),
+                                      ),
+                                    )
+                                );
+                              }
+                              else {
+                                return ListView.builder(
+                                    controller: controller,
+                                    shrinkWrap: true,
+                                    physics: const ClampingScrollPhysics(),
+                                    itemCount: snapshot.data.length,
+                                    itemBuilder: (BuildContext context,
+                                        int index) {
+                                      if (snapshot.data[index].mTo == widget.data.id) {
+                                        return new Card(
+                                          child: new GestureDetector(
+                                            onTap: () {
+                                              Navigator.push (context,
+                                                  MaterialPageRoute(builder: (context) => MessageDetails(snapshot.data[index], widget.data))
+                                              );
+                                            },
+                                            child: new Container(
+                                              padding: new EdgeInsets.all(10.0),
+                                              child: new Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: <Widget>[
+                                                    new Container(
+                                                      child: new Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: <Widget>[
+                                                          new Container(
                                                             padding: new EdgeInsets.only(right: 20.0),
                                                             child: snapshot.data[index].usersInfo.picId == null
                                                                 ? new CircleAvatar(
@@ -329,43 +344,43 @@ class _NewMessagesState extends State<NewMessages> {
                                                               backgroundImage: NetworkImage(url + snapshot.data[index].usersInfo.picId),
                                                               backgroundColor: Colors.transparent,
                                                             ),
-                                                        ),
-                                                        new Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: <Widget>[
-                                                            new Container(
-                                                              padding: new EdgeInsets.only(bottom: 5.0),
-                                                              child: new Text('${snapshot.data[index].usersInfo.title} ${snapshot.data[index].usersInfo.surname} ${snapshot.data[index].usersInfo.firstname}',
-                                                                style: new TextStyle(
-                                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(31),
-                                                                    fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                          ),
+                                                          new Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: <Widget>[
+                                                              new Container(
+                                                                padding: new EdgeInsets.only(bottom: 5.0),
+                                                                child: new Text('${snapshot.data[index].usersInfo.title} ${snapshot.data[index].usersInfo.surname} ${snapshot.data[index].usersInfo.firstname}',
+                                                                  style: new TextStyle(
+                                                                      fontSize: ScreenUtil(allowFontScaling: true).setSp(31),
+                                                                      fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            new Container(
-                                                              padding: new EdgeInsets.only(bottom: 5.0),
-                                                              child: new Text(snapshot.data[index].mMessage.length > 30 ?
-                                                              snapshot.data[index].mMessage.substring(0, 30) + '...'
-                                                                  : snapshot.data[index].mMessage,
-                                                                style: new TextStyle(
-                                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
-                                                                    fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                              new Container(
+                                                                padding: new EdgeInsets.only(bottom: 5.0),
+                                                                child: new Text(snapshot.data[index].mMessage.length > 30 ?
+                                                                snapshot.data[index].mMessage.substring(0, 30) + '...'
+                                                                    : snapshot.data[index].mMessage,
+                                                                  style: new TextStyle(
+                                                                      fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
+                                                                      fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            new Container(
-                                                              child: new Text(snapshot.data[index].messagedate,
-                                                                style: new TextStyle(
-                                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(29),
-                                                                    color: Colors.grey
+                                                              new Container(
+                                                                child: new Text(snapshot.data[index].messagedate,
+                                                                  style: new TextStyle(
+                                                                      fontSize: ScreenUtil(allowFontScaling: true).setSp(29),
+                                                                      color: Colors.grey
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
 //                                                new Container(
 //                                                  margin: new EdgeInsets.only(top: 5.0),
 //                                                  width: 7.0,
@@ -375,36 +390,36 @@ class _NewMessagesState extends State<NewMessages> {
 //                                                      borderRadius: new BorderRadius.circular(70.0)
 //                                                  ),
 //                                                )
-                                                  new Container(
-                                                    margin: new EdgeInsets.only(top: 5.0),
-                                                    child: new Text('R'
-                                                    ),
-                                                  )
-                                                ]
+                                                    new Container(
+                                                      margin: new EdgeInsets.only(top: 5.0),
+                                                      child: new Text('R'
+                                                      ),
+                                                    )
+                                                  ]
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }
-                                    else {
-                                      return new Card(
-                                        child: new GestureDetector(
-                                          onTap: () {
-                                            Navigator.push (context,
-                                                MaterialPageRoute(builder: (context) => MessageDetails(snapshot.data[index], widget.data))
-                                            );
-                                          },
-                                          child: new Container(
-                                            padding: new EdgeInsets.all(10.0),
-                                            child: new Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: <Widget>[
-                                                  new Container(
-                                                    child: new Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: <Widget>[
-                                                        new Container(
+                                        );
+                                      }
+                                      else {
+                                        return new Card(
+                                          child: new GestureDetector(
+                                            onTap: () {
+                                              Navigator.push (context,
+                                                  MaterialPageRoute(builder: (context) => MessageDetails(snapshot.data[index], widget.data))
+                                              );
+                                            },
+                                            child: new Container(
+                                              padding: new EdgeInsets.all(10.0),
+                                              child: new Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: <Widget>[
+                                                    new Container(
+                                                      child: new Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: <Widget>[
+                                                          new Container(
                                                             padding: new EdgeInsets.only(right: 20.0),
                                                             child: snapshot.data[index].sentToInfo.picId == null
                                                                 ? new CircleAvatar(
@@ -416,43 +431,43 @@ class _NewMessagesState extends State<NewMessages> {
                                                               backgroundImage: NetworkImage(url + snapshot.data[index].sentToInfo.picId),
                                                               backgroundColor: Colors.transparent,
                                                             ),
-                                                        ),
-                                                        new Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: <Widget>[
-                                                            new Container(
-                                                              padding: new EdgeInsets.only(bottom: 5.0),
-                                                              child: new Text('${snapshot.data[index].sentToInfo.title} ${snapshot.data[index].sentToInfo.surname} ${snapshot.data[index].sentToInfo.firstname}',
-                                                                style: new TextStyle(
-                                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(31),
-                                                                    fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                          ),
+                                                          new Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: <Widget>[
+                                                              new Container(
+                                                                padding: new EdgeInsets.only(bottom: 5.0),
+                                                                child: new Text('${snapshot.data[index].sentToInfo.title} ${snapshot.data[index].sentToInfo.surname} ${snapshot.data[index].sentToInfo.firstname}',
+                                                                  style: new TextStyle(
+                                                                      fontSize: ScreenUtil(allowFontScaling: true).setSp(31),
+                                                                      fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            new Container(
-                                                              padding: new EdgeInsets.only(bottom: 5.0),
-                                                              child: new Text(snapshot.data[index].mMessage.length > 30 ?
-                                                              snapshot.data[index].mMessage.substring(0, 30) + '...'
-                                                                  : snapshot.data[index].mMessage,
-                                                                style: new TextStyle(
-                                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
-                                                                    fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                              new Container(
+                                                                padding: new EdgeInsets.only(bottom: 5.0),
+                                                                child: new Text(snapshot.data[index].mMessage.length > 30 ?
+                                                                snapshot.data[index].mMessage.substring(0, 30) + '...'
+                                                                    : snapshot.data[index].mMessage,
+                                                                  style: new TextStyle(
+                                                                      fontSize: ScreenUtil(allowFontScaling: true).setSp(28),
+                                                                      fontWeight: !snapshot.data[index].messageread ? FontWeight.bold : FontWeight.normal
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            new Container(
-                                                              child: new Text(snapshot.data[index].messagedate,
-                                                                style: new TextStyle(
-                                                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(29),
-                                                                    color: Colors.grey
+                                                              new Container(
+                                                                child: new Text(snapshot.data[index].messagedate,
+                                                                  style: new TextStyle(
+                                                                      fontSize: ScreenUtil(allowFontScaling: true).setSp(29),
+                                                                      color: Colors.grey
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
 //                                                new Container(
 //                                                  margin: new EdgeInsets.only(top: 5.0),
 //                                                  width: 7.0,
@@ -462,25 +477,26 @@ class _NewMessagesState extends State<NewMessages> {
 //                                                      borderRadius: new BorderRadius.circular(70.0)
 //                                                  ),
 //                                                )
-                                                  new Container(
-                                                    margin: new EdgeInsets.only(top: 5.0),
-                                                    child: new Text('S'
-                                                    ),
-                                                  )
-                                                ]
+                                                    new Container(
+                                                      margin: new EdgeInsets.only(top: 5.0),
+                                                      child: new Text('S'
+                                                      ),
+                                                    )
+                                                  ]
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
+                                        );
+                                      }
                                     }
-                                  }
-                              );
+                                );
+                              }
                             }
-                          }
+                        ),
                       ),
-                    ),
-                  ]
-              )
+                    ]
+                )
+            )
           )
       );
     }

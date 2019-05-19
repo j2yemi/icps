@@ -164,7 +164,7 @@ class _AttendeesState extends State<Attendees> {
     
     print ('this this: ${data.map((f) => f['usersInfo'])}');
 
-//    attendee..sort((a, b) => a.id.compareTo(b.id));
+    attendee..sort((a, b) => b.id.compareTo(a.id));
 
     return attendee;
   }
@@ -608,6 +608,7 @@ class _AttendeeDetailsState extends State<AttendeeDetails> {
                       children: <Widget>[
                         widget.joinAttendee.usersInfo.picId == null ?
                         new Container(
+                          height: ScreenUtil.getInstance().setHeight(815),
                           decoration: new BoxDecoration(
                             image: new DecorationImage(image: new AssetImage('assets/images/splash/SplashBg.jpg'),
                               fit: BoxFit.cover,

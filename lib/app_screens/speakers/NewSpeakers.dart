@@ -217,7 +217,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                         new Container(
                                           padding: new EdgeInsets.only(bottom: 53.0),
                                           width: MediaQuery.of(context).size.width,
-                                          height: ScreenUtil.getInstance().setHeight(301),
+                                          height: ScreenUtil.getInstance().setHeight(351),
                                           decoration: new BoxDecoration(
                                             image: new DecorationImage(
                                                 image: new AssetImage(
@@ -238,7 +238,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                         ),
                                         new Container(
                                           width: MediaQuery.of(context).size.width,
-                                          height: ScreenUtil.getInstance().setHeight(301),
+                                          height: ScreenUtil.getInstance().setHeight(351),
                                           color: Color.fromRGBO(180, 188, 151, 0.7),
                                         ),
 
@@ -297,7 +297,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                             padding: new EdgeInsets.only(bottom: 6.0),
                                           child: new Text('${snapshot.data[index].workPosition}, ${snapshot.data[index].organisation}')
                                         ),
-                                        snapshot.data[index].facebookId == null ?
+                                        snapshot.data[index].facebookId == null || snapshot.data[index].facebookId == '' ?
                                         new Container() :
                                         new Container(
                                           padding: new EdgeInsets.only(bottom: 3.0),
@@ -316,7 +316,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
                                             ],
                                           )
                                         ),
-                                        snapshot.data[index].twitterId == null ?
+                                        snapshot.data[index].twitterId == null || snapshot.data[index].twitterId == '' ?
                                         new Container() :
                                         new Container(
                                           padding: new EdgeInsets.only(bottom: 3.0),
@@ -500,6 +500,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                       children: <Widget>[
                         widget.conferenceSpeaker.pic_id == null ?
                         new Container(
+                          height: ScreenUtil.getInstance().setHeight(815),
                           decoration: new BoxDecoration(
                             image: new DecorationImage(image: new AssetImage('assets/images/splash/SplashBg.jpg'),
                               fit: BoxFit.cover,
@@ -507,7 +508,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
 //                  color: Color.fromRGBO(180, 188, 151, 0.8),
                           ),
                           child: new Container(
-                            padding: new EdgeInsets.only(top: 50.0, bottom: 50.0),
+                            padding: new EdgeInsets.only(top: 80.0, bottom: 50.0),
                             color: Color.fromRGBO(180, 188, 151, 0.8),
                             child: new Center(
                                 child: new CircleAvatar(
@@ -526,7 +527,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
 //                    ),
                             ),
                           ),
-                        ) :
+                        ):
                         new Container(
                           width: MediaQuery.of(context).size.width,
                           height: ScreenUtil.getInstance().setHeight(815),
@@ -620,7 +621,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                                         )
                                     )
                                 ),
-                                widget.conferenceSpeaker.facebookId == null ?
+                                widget.conferenceSpeaker.facebookId == null || widget.conferenceSpeaker.facebookId == '' ?
                                 new Center() :
                                 new Center (
                                     child: new Container(
@@ -656,7 +657,7 @@ class _SpeakersProfileState extends State<SpeakersProfile> {
                                         )
                                     )
                                 ),
-                                widget.conferenceSpeaker.twitterId == null ?
+                                widget.conferenceSpeaker.twitterId == null || widget.conferenceSpeaker.twitterId == '' ?
                                 new Center() :
                                 new Center (
                                     child: new Container(
