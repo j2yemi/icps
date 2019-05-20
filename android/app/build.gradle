@@ -43,8 +43,9 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         multiDexEnabled true
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 2
+        versionName "2.0"
+        ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
