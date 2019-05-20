@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
       },labelText: 'Register')
     ];
 
-    widget.data = widget.data == null && widget.data2 != null ? widget.data2 : widget.data == null && widget.data2 == null ? Data() : widget.data;
+    widget.data = (widget.data == null && widget.data2 != null) ? widget.data2 : (widget.data == null && widget.data2 == null) ? Data() : widget.data;
    _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
 
    this._getProfile();
@@ -125,8 +125,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Drawer _buildDrawer (context) {
-    _getProfile();
-  _getMessages();
+//    _getProfile();
+//  _getMessages();
     switch (_authStatus) {
       case AuthStatus.notSignedIn:
         return new Drawer(
@@ -1383,7 +1383,7 @@ class _HomePageState extends State<HomePage> {
 //                              child: new Icon(Icons.feedback ),
 //                            ),
                                       ),
-                                      widget.data.id == 0 ?
+                                      widget.data == null ?
                                       new Container() :
                                       new Positioned(
                                         bottom: 10.0,
