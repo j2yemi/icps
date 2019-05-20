@@ -4,12 +4,12 @@ import 'package:icps/app_screens/ActivityFeed.dart';
 import 'package:icps/app_screens/drawer/Login.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_rating/flutter_rating.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+//import 'package:flutter_rating/flutter_rating.dart';
+//import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
-import 'dart:convert';
+//import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
+//import 'package:dio/dio.dart';
 //import 'package:date_format/date_format.dart';
 import 'package:intl/intl.dart';
 
@@ -43,7 +43,9 @@ class _NewAgendaTwoState extends State<NewAgendaTwo> {
 
   ScrollController _controller = new ScrollController();
 
-  AuthStatus _authStatus = AuthStatus.notSignedIn;
+  ScrollController controller;
+
+//  AuthStatus _authStatus = AuthStatus.notSignedIn;
 
   String url = 'http://icps19.com:6060/icps/resources/conferencepresentations/profilepics/';
 
@@ -88,7 +90,7 @@ class _NewAgendaTwoState extends State<NewAgendaTwo> {
 
           DateTime dated = DateTime.parse(ss.conferenceDate);
 
-          String formatedDate = DateFormat('EEEE, MMM d, ''yyyy').format(dated);
+//          String formatedDate = DateFormat('EEEE, MMM d, ''yyyy').format(dated);
           String day = DateFormat('d').format(dated);
 
           //        conferenceAgendaVar = conferenceAgendaVar ?? ConferenceAgenda(
@@ -134,6 +136,14 @@ class _NewAgendaTwoState extends State<NewAgendaTwo> {
   @override
   void initState() {
     super.initState();
+
+    _controller = _controller..addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(_scrollListener);
+    super.dispose();
   }
 
   @override
@@ -331,7 +341,7 @@ class _NewAgendaTwoState extends State<NewAgendaTwo> {
                                   shrinkWrap: true,
                                   physics: ClampingScrollPhysics(),
 //          physics: const AlwaysScrollableScrollPhysics(),
-//          controller: _controller,
+                                  controller: _controller,
                                   itemCount: snapshot.data.length,
                                   itemBuilder: (BuildContext context, int index)
                                   {
@@ -478,6 +488,15 @@ class _NewAgendaTwoState extends State<NewAgendaTwo> {
             ]
         )
     );
+  }
+
+  void _scrollListener() {
+    print(controller.position.extentAfter);
+    if (controller.position.extentAfter < 500) {
+      setState(() {
+        _getWednesdayAgenda();
+      });
+    }
   }
 }
 //
@@ -648,21 +667,21 @@ class _AgendaDetailsState extends State<AgendaDetails> {
   double rating = 4.1;
   int starCount = 5;
 
-  final TextEditingController _feedbackFilter = new TextEditingController();
+//  final TextEditingController _feedbackFilter = new TextEditingController();
 
-  String _feedback = "";
+//  String _feedback = "";
 
-  ArrivalState() {
-    _feedbackFilter.addListener(_feedbackListen);
-  }
+//  ArrivalState() {
+//    _feedbackFilter.addListener(_feedbackListen);
+//  }
 
-  void _feedbackListen() {
-    if (_feedbackFilter.text.isEmpty) {
-      _feedback = "";
-    } else {
-      _feedback = _feedbackFilter.text;
-    }
-  }
+//  void _feedbackListen() {
+//    if (_feedbackFilter.text.isEmpty) {
+//      _feedback = "";
+//    } else {
+//      _feedback = _feedbackFilter.text;
+//    }
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -725,7 +744,7 @@ class _AgendaDetailsState extends State<AgendaDetails> {
                               ),
                               new Container(
                                 width: ScreenUtil.getInstance().setWidth(450),
-                                child: new Text(widget.conferenceAgenda.usersInfo.title + '. ' +
+                                child: new Text(widget.conferenceAgenda.usersInfo.title + ' ' +
                                     widget.conferenceAgenda.usersInfo.surname + ' ' + widget.conferenceAgenda.usersInfo.firstname,
                                   style: new TextStyle(
                                     fontSize: ScreenUtil(allowFontScaling: true).setSp(36),
@@ -761,6 +780,7 @@ class _AgendaDetailsState extends State<AgendaDetails> {
                                   )
                               ),
                               new Container(
+                                width: ScreenUtil.getInstance().setWidth(450),
                                 child: new Text('${widget.conferenceAgenda.usersInfo.workPosition}, ${widget.conferenceAgenda.usersInfo.organisation}',
                                   style: new TextStyle(
                                     fontSize: ScreenUtil(allowFontScaling: true).setSp(36),
@@ -796,6 +816,7 @@ class _AgendaDetailsState extends State<AgendaDetails> {
                                   )
                               ),
                               new Container(
+                                width: ScreenUtil.getInstance().setWidth(450),
                                 child: new Text('Congress Hall',
                                   style: new TextStyle(
                                     fontSize: ScreenUtil(allowFontScaling: true).setSp(36),
@@ -831,6 +852,7 @@ class _AgendaDetailsState extends State<AgendaDetails> {
                                   )
                               ),
                               new Container(
+                                width: ScreenUtil.getInstance().setWidth(450),
                                 child: new Text('${widget.conferenceAgenda.moderator}',
                                   style: new TextStyle(
                                     fontSize: ScreenUtil(allowFontScaling: true).setSp(36),
@@ -857,8 +879,8 @@ class _AgendaDetailsState extends State<AgendaDetails> {
                           child: new Row(
                             children: <Widget>[
                               new Container(
-                                  padding: new EdgeInsets.only(left: 35.0, right: 45.0),
-                                  child: new Text('Panel Disccussants',
+                                  padding: new EdgeInsets.only(left: 35.0, right: 74.0),
+                                  child: new Text('Panel',
                                     style: new TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
