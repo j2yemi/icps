@@ -202,7 +202,45 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                         new Container(
-                          padding: new EdgeInsets.only(top: 5.0,),
+                          padding: new EdgeInsets.only(top: 15.0),
+                          child: new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      new Container(
+                                        padding: new EdgeInsets.only(right: 30.0),
+                                        child: new Icon(
+                                            Icons.card_membership
+                                        ),
+                                      ),
+                                      new Container (
+                                          width: ScreenUtil.getInstance().setWidth(445),
+                                          child: new Text('${user.conferenceId}',
+                                            style: new TextStyle(
+                                              fontSize: ScreenUtil(allowFontScaling: true)
+                                                  .setSp(31),
+                                            ),
+                                          )
+                                      ),
+                                    ],
+                                  )
+                              ),
+//                              IconButton(
+//                                icon: Icon(Icons.edit),
+//                                onPressed: () {
+//                                  Navigator.push(context,
+//                                      MaterialPageRoute(builder: (context) => UpdateName(user: user, password: widget.password, data: widget.data,))
+//                                  );
+//                                },
+//                              )
+                            ],
+                          ),
+                        ),
+                        new Container(
+                          padding: new EdgeInsets.only(top: 15.0),
                           child: new Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
