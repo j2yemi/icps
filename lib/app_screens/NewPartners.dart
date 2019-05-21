@@ -259,7 +259,7 @@ class _NewPartnersState extends State<NewPartners> {
                                     ),
                                   ),
                                   new Container(
-                                    padding: new EdgeInsets.only(top: 10.0),
+                                    padding: new EdgeInsets.only(top: 10.0, left: 9.0, right: 9.0),
                                     child: new Column(
                                       children: <Widget>[
                                         new Container(
@@ -274,18 +274,18 @@ class _NewPartnersState extends State<NewPartners> {
                                             padding: new EdgeInsets.only(bottom: 3.0),
                                             child: new Text('${snapshot.data[index].partnercategory}')
                                         ),
-                                        new Container(
-                                          padding: new EdgeInsets.only(bottom: 3.0),
-                                          child: new Text('${snapshot.data[index].email}'),
-                                        ),
+//                                        new Container(
+//                                          padding: new EdgeInsets.only(bottom: 3.0),
+//                                          child: new Text('${snapshot.data[index].email}'),
+//                                        ),
                                         new Container(
                                           padding: new EdgeInsets.only(bottom: 3.0),
                                           child: new Text('${snapshot.data[index].website}'),
                                         ),
-                                        new Container(
-                                          padding: new EdgeInsets.only(bottom: 3.0),
-                                          child: new Text('${snapshot.data[index].contact}'),
-                                        ),
+//                                        new Container(
+//                                          padding: new EdgeInsets.only(bottom: 3.0),
+//                                          child: new Text('${snapshot.data[index].contact}'),
+//                                        ),
 //                                        new Container(
 //                                          padding: new EdgeInsets.only(bottom: 3.0),
 //                                          child: new Text('${snapshot.data[index].briefProfile}'),

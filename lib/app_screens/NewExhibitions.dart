@@ -254,7 +254,7 @@ class _NewExhibitionsState extends State<NewExhibitions> {
                                 ),
                               ),
                               new Container(
-                                padding: new EdgeInsets.only(top: 10.0),
+                                padding: new EdgeInsets.only(top: 10.0, left: 9.0, right: 9.0),
                                 child: new Column(
                                   children: <Widget>[
                                     new Container(
@@ -269,10 +269,10 @@ class _NewExhibitionsState extends State<NewExhibitions> {
 //                                        padding: new EdgeInsets.only(bottom: 3.0),
 //                                        child: new Text('${snapshot.data[index].title}')
 //                                    ),
-                                    new Container(
-                                      padding: new EdgeInsets.only(bottom: 3.0),
-                                      child: new Text('${snapshot.data[index].email}'),
-                                    ),
+//                                    new Container(
+//                                      padding: new EdgeInsets.only(bottom: 3.0),
+//                                      child: new Text('${snapshot.data[index].email}'),
+//                                    ),
                                     new Container(
                                       padding: new EdgeInsets.only(bottom: 3.0),
                                       child: new Text('${snapshot.data[index].website}'),

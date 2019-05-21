@@ -477,7 +477,7 @@ class _CocktailState extends State<Cocktail> {
 
   void _generateConfirmationCode() {
 
-    String phoneCharacter = widget.data.phone.trim().substring(widget.data.phone.length - 2, widget.data.phone.length - 1);
+    String phoneCharacter = widget.data.phone.trim().substring(widget.data.phone.length - 2);
 
     var rng = new Random();
 

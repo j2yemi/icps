@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:icps/agendaJson.dart';
+import 'package:icps/app_screens/agenda/NewAgendaTwo.dart';
+import 'package:icps/Constants.dart';
+import 'package:icps/app_screens/Register.dart';
 import 'package:icps/app_screens/drawer/Login.dart';
+
+import 'package:icps/app_screens/popupMenu/Dashboard.dart';
+import 'package:icps/app_screens/popupMenu/EditProfile.dart';
+import 'package:icps/app_screens/popupMenu/Settings.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_rating/flutter_rating.dart';
@@ -25,9 +32,9 @@ void main() async{
 
 class NewAgendaOne extends StatefulWidget {
 
-  Data data;
+  Data data; String password;
 
-  NewAgendaOne({this.data});
+  NewAgendaOne({this.data, this.password});
 
   @override
   _NewAgendaOneState createState() => _NewAgendaOneState ();
@@ -43,9 +50,9 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
 
   ScrollController _controller = new ScrollController();
 
-//  AuthStatus _authStatus = AuthStatus.notSignedIn;
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
 
-  ScrollController controller;
+//  ScrollController controller;
 
   String url = 'http://icps19.com:6060/icps/resources/conferencepresentations/profilepics/';
 
@@ -141,16 +148,16 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
 
       widget.data = widget.data ?? Data();
 
-//      _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
+      _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
 
-      _controller = _controller..addListener(_scrollListener);
+//      _controller = _controller..addListener(_scrollListener);
   }
 
-  @override
-  void dispose() {
-    controller.removeListener(_scrollListener);
-    super.dispose();
-  }
+//  @override
+//  void dispose() {
+//    controller.removeListener(_scrollListener);
+//    super.dispose();
+//  }
 
     @override
     Widget build(BuildContext context) {
@@ -362,75 +369,73 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
                       )
                   )
               ),
-              child: new Column (
-                children: <Widget>[
-                  new GestureDetector(
-                    onTap: () {
-                      Navigator.push (context,
-                          MaterialPageRoute(builder: (context) => AgendaDetails(conferenceAgenda: snapshot.data[index], data: widget.data))
-                      );
-                    },
-                    child: new Column (
-                      children: <Widget>[
-                        new Container(
-                          padding: new EdgeInsets.only(top: 10.0, left: 23.0),
-                          child: new Row(
-                            children: <Widget>[
-                              new Container(
-                                child: new Icon(Icons.mic,
-                                  size: 34.0,
-                                  color: Color.fromRGBO(180, 188, 151, 1),
-                                ),
+              child: new GestureDetector(
+                onTap: () {
+                  Navigator.push (context,
+                      MaterialPageRoute(builder: (context) => AgendaDetails(conferenceAgenda: snapshot.data[index], data: widget.data, password: widget.password))
+                  );
+                },
+                child: new Column (
+                  children: <Widget>[
+                    new Container(
+                      padding: new EdgeInsets.only(top: 10.0, left: 23.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Icon(Icons.mic,
+                              size: 34.0,
+                              color: Color.fromRGBO(180, 188, 151, 1),
+                            ),
+                          ),
+                          new Container(
+                            margin: new EdgeInsets.only(left: 59.0),
+                            width: ScreenUtil.getInstance().setWidth(500),
+                            child: new Text(snapshot.data[index].title,
+                              style: new TextStyle(
+                                  fontSize: ScreenUtil(allowFontScaling: true)
+                                      .setSp(38),
+                                  fontWeight: FontWeight.bold
                               ),
-                              new Container(
-                                margin: new EdgeInsets.only(left: 59.0),
-                                width: ScreenUtil.getInstance().setWidth(500),
-                                child: new Text(snapshot.data[index].title,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    new Container(
+                      padding: new EdgeInsets.only(left: 16.0, top: 10.0),
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                              width: ScreenUtil.getInstance().setWidth(183),
+                              child: new Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  new Text(snapshot.data[index].timeStart + ' - ' + snapshot.data[index].timeEnd,
+                                    style: new TextStyle(
+                                        fontSize: ScreenUtil(
+                                            allowFontScaling: true).setSp(29)
+                                    ),
+                                  ),
+//                                          new Text('5 Sep')
+                                ],
+                              )
+                          ),
+                          new Container(
+                            width: ScreenUtil.getInstance().setWidth(380),
+                            padding: new EdgeInsets.only(left: 0.0),
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                new Text(snapshot.data[index].description,
                                   style: new TextStyle(
-                                      fontSize: ScreenUtil(allowFontScaling: true)
-                                          .setSp(38),
-                                      fontWeight: FontWeight.bold
+                                      fontSize: ScreenUtil(
+                                          allowFontScaling: true).setSp(31)
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        new Container(
-                          padding: new EdgeInsets.only(left: 16.0, top: 10.0),
-                          child: new Row(
-                            children: <Widget>[
-                              new Container(
-                                  width: ScreenUtil.getInstance().setWidth(183),
-                                  child: new Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      new Text(snapshot.data[index].timeStart + ' - ' + snapshot.data[index].timeEnd,
-                                        style: new TextStyle(
-                                            fontSize: ScreenUtil(
-                                                allowFontScaling: true).setSp(29)
-                                        ),
-                                      ),
-//                                          new Text('5 Sep')
-                                    ],
-                                  )
-                              ),
-                              new Container(
-                                width: ScreenUtil.getInstance().setWidth(380),
-                                padding: new EdgeInsets.only(left: 0.0),
-                                child: new Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    new Text(snapshot.data[index].description,
-                                      style: new TextStyle(
-                                          fontSize: ScreenUtil(
-                                              allowFontScaling: true).setSp(31)
-                                      ),
-                                    ),
 //                                          new Text('Exhibit Hall C')
-                                  ],
-                                ),
-                              ),
+                              ],
+                            ),
+                          ),
 //                              new Container(
 //                                margin: new EdgeInsets.only(left: 54.0),
 //                                width: 7.0,
@@ -440,22 +445,22 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
 //                                    borderRadius: new BorderRadius.circular(70.0)
 //                                ),
 //                              )
-                              new Container(
-                                margin: new EdgeInsets.only(left: 24.0),
-                                child: snapshot.data[index].usersInfo.picId == null
-                                    ? new CircleAvatar(
-                                  child: new Text('${snapshot.data[index].usersInfo.surname.substring(0, 1)}'
-                                      '${snapshot.data[index].usersInfo.firstname.substring(0, 1)}'
-                                  ),
-                                )
-                                    : CircleAvatar(
-                                  backgroundImage: NetworkImage(url + snapshot.data[index].usersInfo.picId),
-                                  backgroundColor: Colors.transparent,
-                                ),
+                          new Container(
+                            margin: new EdgeInsets.only(left: 24.0),
+                            child: snapshot.data[index].usersInfo.picId == null
+                                ? new CircleAvatar(
+                              child: new Text('${snapshot.data[index].usersInfo.surname.substring(0, 1)}'
+                                  '${snapshot.data[index].usersInfo.firstname.substring(0, 1)}'
                               ),
-                            ],
+                            )
+                                : CircleAvatar(
+                              backgroundImage: NetworkImage(url + snapshot.data[index].usersInfo.picId),
+                              backgroundColor: Colors.transparent,
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
 //                              new Container(
 //                                padding: new EdgeInsets.only(left: 16.0, top: 10.0),
 //                                child: new Row(
@@ -477,11 +482,9 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
 //                                ),
 //                              )
 
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                  ],
+                ),
+              )
             );
           }
 
@@ -496,14 +499,14 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
       );
     }
 
-  void _scrollListener() {
-    print(controller.position.extentAfter);
-    if (controller.position.extentAfter < 500) {
-      setState(() {
-        _getTuesdayAgenda();
-      });
-    }
-  }
+//  void _scrollListener() {
+//    print(controller.position.extentAfter);
+//    if (controller.position.extentAfter < 500) {
+//      setState(() {
+//        _getTuesdayAgenda();
+//      });
+//    }
+//  }
   }
 //
 //                  ]
@@ -660,9 +663,9 @@ class _NewAgendaOneState extends State<NewAgendaOne> {
 //}
 
 class AgendaDetails extends StatefulWidget {
-  final ConferenceAgenda conferenceAgenda; Data data;
+  final ConferenceAgenda conferenceAgenda; Data data; String password;
 
-  AgendaDetails({this.conferenceAgenda, this.data});
+  AgendaDetails({this.conferenceAgenda, this.data, this.password});
 
   @override
   _AgendaDetailsState createState() => _AgendaDetailsState();
@@ -672,6 +675,8 @@ class _AgendaDetailsState extends State<AgendaDetails> {
 
   double rating = 4.1;
   int starCount = 5;
+
+  AuthStatus _authStatus = AuthStatus.notSignedIn;
 
 //  final TextEditingController _feedbackFilter = new TextEditingController();
 
@@ -688,6 +693,17 @@ class _AgendaDetailsState extends State<AgendaDetails> {
 //  }
 
   @override
+  void initState() {
+    super.initState();
+
+    widget.data = widget.data ?? Data();
+
+    _authStatus = ((widget.data.surname == '')) ? AuthStatus.notSignedIn : (widget.data.speaker && widget.data.surname != '') ? AuthStatus.signedInSpeaker : AuthStatus.signedIn;
+
+//      _controller = _controller..addListener(_scrollListener);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
@@ -702,11 +718,22 @@ class _AgendaDetailsState extends State<AgendaDetails> {
           ),
         ),
         actions: <Widget>[
-          IconButton(icon: Icon(
-              Icons.search
-          ),
-            onPressed: () {
-
+//          IconButton(icon: Icon(
+//              Icons.search
+//          ),
+//            onPressed: () {
+//
+//            },
+//          ),
+          PopupMenuButton<String>(
+            onSelected: choiceAction,
+            itemBuilder: (BuildContext context) {
+              return Constants.choices.map((String choice){
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: new Text(choice),
+                );
+              }).toList();
             },
           ),
         ],
@@ -1015,7 +1042,7 @@ class _AgendaDetailsState extends State<AgendaDetails> {
                                 ),
                                 onPressed: () {
                                   Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data))
+                                      MaterialPageRoute(builder: (context) => ActivityFeed(data: widget.data, password: widget.password))
                                   );
                                 },
                               ),
@@ -1033,6 +1060,65 @@ class _AgendaDetailsState extends State<AgendaDetails> {
           ),
         ),
       )
+    );
+  }
+
+  void choiceAction (String choice)
+  {
+    if (choice == Constants.Dashboard){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Dashboard(data: widget.data, password: widget.password))
+      );
+    }
+    else if (choice == Constants.EditProfile){
+      if (_authStatus == AuthStatus.notSignedIn)
+      {
+        _showDialog(context);
+      }
+      else
+      {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EditProfile(data: widget.data, password: widget.password,))
+        );
+      }
+    }
+    else if (choice == Constants.Settings){
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => Settings(data: widget.data, password: widget.password))
+      );
+    }
+  }
+
+  void _showDialog (BuildContext context)
+  {
+    var alertDialog = AlertDialog(
+      title: new Text('Login'),
+      content: new Text('You are not Logged in'),
+      actions: <Widget>[
+        new FlatButton(
+          child: new Text('Login'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Login()));
+          },
+        ),
+        new FlatButton(
+          child: new Text('Register'),
+          onPressed: () {
+            Navigator.push (context, MaterialPageRoute(builder: (context) => Register()));
+          },
+        ),
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+//       if (progressString != '100%') {
+        return alertDialog;
+
+//       }
+      },
+//        barrierDismissible: false
     );
   }
 }

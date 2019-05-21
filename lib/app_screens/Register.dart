@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart' as prefix1;
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
+import 'package:icps/app_screens/drawer/Login.dart';
 
 import 'package:icps/icps_19_json.dart';
 import 'package:icps/app_screens/HomePage.dart';
@@ -440,7 +441,7 @@ class _RegisterState extends State<Register> {
                     decoration: new BoxDecoration(
                         image: new DecorationImage(
                             image: new AssetImage(
-                                'assets/images/logo/icpslogo.png'
+                                'assets/images/logo/icpslogoTwo.png'
                             )
                         )
                     ),
@@ -1064,7 +1065,7 @@ class _RegisterState extends State<Register> {
 
   void _generateConfirmationCode() {
 
-    String phoneCharacter = _phone.trim().substring(_phone.length - 2, _phone.length - 1);
+    String phoneCharacter = _phone.trim().substring(_phone.length - 2);
 
     var rng = new Random();
 
@@ -1118,7 +1119,7 @@ class _RegisterState extends State<Register> {
 //              firstname: userFirstname
 //            );
 
-//            var data = Data.fromUsersInfo(UsersInfo.fromJson(response.data));
+            var data2 = Data.fromUsersInfo(UsersInfo.fromJson(response.data));
 
             Fluttertoast.showToast(
                 msg: "Login successful, please wait",
@@ -1144,9 +1145,9 @@ class _RegisterState extends State<Register> {
 
                   Future.delayed (Duration(seconds: 2),
                           () async {
-//                        Navigator.push(context,
-//                            MaterialPageRoute(builder: (context) => HomePage(data: data, password: _password))
-//                        );
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => HomePage(data2: data2, password: _password))
+                        );
                         print('5 seconds');
                       }
                   );
@@ -1175,6 +1176,7 @@ class _RegisterState extends State<Register> {
         else
         {
 //          _authenticate();
+          _generateConfirmationCode();
             _register();
 //          _showDialog(context, 'Registering');
 //
@@ -2189,6 +2191,8 @@ class _RegisterState extends State<Register> {
       var lusername = _username;
       var lpassword = _password;
 
+      print('code: $confirmationCode');
+
       response = await dio.post(sendUrl, queryParameters: {
         "companysector": _currentCompanySectorSelected,
         "conference_id": confirmationCode,
@@ -2300,7 +2304,7 @@ class _RegisterState extends State<Register> {
 //              firstname: userFirstname
 //            );
 
-                      var data2 = DataTwo.fromUsersInfo(
+                      var data2 = Data.fromUsersInfo(
                           UsersInfo.fromJson(response2.data));
 
                       Fluttertoast.showToast(
@@ -2581,7 +2585,7 @@ class _RegisterState extends State<Register> {
   }
 }
 
-class DataTwo
+class DataTwo extends Data
 {
   int id;
   String surname;

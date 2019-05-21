@@ -368,7 +368,7 @@ class _UpdateNameState extends State<UpdateName> {
 
   final global = GlobalKey();
 
-  var _title = ['Alh.', 'Bar.', 'Dr.', 'Engr.', 'Fr.', 'Haj.', 'Mal.', 'Miss', 'Mr.', 'Mrs.', 'Pharm.', 'Prof.', 'Sis.'];
+  var _title = ['', 'Alh.', 'Bar.', 'Dr.', 'Engr.', 'Fr.', 'Haj.', 'Mal.', 'Miss', 'Mr.', 'Mrs.', 'Pharm.', 'Prof.', 'Sis.'];
 
 
   String _surname = "";

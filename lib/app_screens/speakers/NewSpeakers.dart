@@ -197,7 +197,7 @@ class _NewSpeakersState extends State<NewSpeakers> {
                         gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                           childAspectRatio: MediaQuery.of(context).size.width /
-                              (MediaQuery.of(context).size.height - 70),
+                              (MediaQuery.of(context).size.height - 41),
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           return new Card(

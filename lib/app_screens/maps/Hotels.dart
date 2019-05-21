@@ -161,7 +161,7 @@ class _HotelsState extends State<Hotels> {
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Boardwalk Hotel',
                                 style: TextStyle (
-                                  fontSize: 17.0,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
                                 ),
                               ),
                             ),
@@ -173,12 +173,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.1',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(26)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: rating,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -191,7 +191,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(63)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -201,6 +204,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('3-star hotel',
                                 style: new TextStyle(
                                     color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -279,7 +283,7 @@ class _HotelsState extends State<Hotels> {
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Serendib Hotel',
                                 style: TextStyle (
-                                  fontSize: 17.0,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
                                 ),
                               ),
                             ),
@@ -291,12 +295,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.8',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.8,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -309,7 +313,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(18)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -319,6 +326,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('3-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -396,7 +404,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                             margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Fraser Suites Abuja',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -407,12 +417,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.6',
                                       style: new TextStyle(
                                         color: Colors.orange,
-                                        fontSize: 16.0
+                                        fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 12.0,
                                     rating: 4.6,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -425,7 +435,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(707)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -435,6 +448,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('4-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -442,13 +456,19 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               padding: new EdgeInsets.only(top: 5.0),
                               child: new Text('1 pool & 2 restaurants',
-                                style: new TextStyle(color: Colors.grey),
+                                style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                ),
                               ),
                             ),
                             new Container(
                               padding: new EdgeInsets.only(left: 6.0),
                               child: new Text('Free Wi-Fi & free breakfast',
-                                style: new TextStyle(color: Colors.grey),
+                                style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                ),
                               ),
                             )
                           ],
@@ -524,7 +544,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Transcorp Hilton',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -535,12 +557,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.5',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.5,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -553,7 +575,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(7,295)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -563,6 +588,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('5-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -570,12 +596,18 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               padding: new EdgeInsets.only(top: 5.0),
                               child: new Text('1 pool & 1 piano bar',
-                                style: new TextStyle(color: Colors.grey),
+                                style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                ),
                               ),
                             ),
                             new Container(
                               child: new Text('Free Wi-Fi',
-                                style: new TextStyle(color: Colors.grey),
+                                style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                ),
                               ),
                             )
                           ],
@@ -651,7 +683,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Corinthia Villa Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -662,12 +696,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.3',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.3,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -680,7 +714,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(334)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -690,6 +727,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -767,7 +805,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Sheraton Abuja Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -778,12 +818,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.1',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.1,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -796,7 +836,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(3,319)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -806,6 +849,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('4-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -815,6 +859,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Modern Lodging with a pool',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -823,6 +868,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Free Wi-Fi',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -900,7 +946,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Valencia Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -911,12 +959,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.8',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.8,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -929,7 +977,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(303)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -939,6 +990,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -948,6 +1000,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Business hotel with dinning',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1025,7 +1078,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Quo Vadis Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1036,12 +1091,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.3',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.3,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1054,7 +1109,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(103)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1064,6 +1122,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('4-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1141,7 +1200,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Yaban Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1152,12 +1213,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.6',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.6,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1170,7 +1231,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(29)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1180,6 +1244,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('3-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1257,7 +1322,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Citilodge Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1268,12 +1335,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.4',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.4,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1286,7 +1353,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(94)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1296,6 +1366,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('3-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1373,7 +1444,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Newton Park Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1384,12 +1457,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.9',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.9,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1402,7 +1475,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(394)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1412,6 +1488,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1489,7 +1566,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Vynedresa Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1500,12 +1579,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.9',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.9,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1518,7 +1597,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(94)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1528,6 +1610,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('3-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1605,7 +1688,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Hotel Ambassador',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1616,12 +1701,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.3',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.3,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1634,7 +1719,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(19)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1644,6 +1732,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Lodging',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1721,7 +1810,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Western Dreams Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1732,12 +1823,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.6',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.6,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1750,7 +1841,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(130)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1760,13 +1854,17 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('4-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
                             ),
                             new Container(
                               child: new Text ('1 outdoor pool',
-                                style: new TextStyle(color: Colors.grey),
+                                style: new TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                ),
                               ),
                             )
                           ],
@@ -1842,7 +1940,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('1 Oak Place',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1853,12 +1953,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.8',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.8,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1871,7 +1971,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(199)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1881,6 +1984,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -1958,7 +2062,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Kebbi Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -1969,12 +2075,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.4',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.4,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -1987,7 +2093,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(68)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -1997,6 +2106,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('2-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -2074,7 +2184,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('BON Hotel Elvis',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -2085,12 +2197,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.4',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.4,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -2103,7 +2215,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(26)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -2113,6 +2228,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -2121,6 +2237,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Free Wi-Fi',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -2198,7 +2315,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Roses Hotel',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -2209,12 +2328,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('4.0',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 4.0,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -2227,7 +2346,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(17)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -2237,6 +2359,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('Hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),
@@ -2314,7 +2437,9 @@ class _HotelsState extends State<Hotels> {
                             new Container(
                               margin: new EdgeInsets.only(left: 12.0),
                               child: Text('Petrus Hotel Royale',
-                                style: TextStyle (fontSize: 17.0),
+                                style: TextStyle (
+                                    fontSize: ScreenUtil(allowFontScaling: true).setSp(28)
+                                ),
                               ),
                             ),
                             new Container(
@@ -2325,12 +2450,12 @@ class _HotelsState extends State<Hotels> {
                                     child: new Text('3.8',
                                       style: new TextStyle(
                                           color: Colors.orange,
-                                          fontSize: 16.0
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                       ),
                                     ),
                                   ),
                                   new StarRating(
-                                    size: 20.0,
+                                    size: 13.0,
                                     rating: 3.8,
                                     color: Colors.orange,
                                     borderColor: Colors.grey,
@@ -2343,7 +2468,10 @@ class _HotelsState extends State<Hotels> {
                                   ),
                                   new Container(
                                     child: new Text('(94)',
-                                      style: new TextStyle(color: Colors.grey),
+                                      style: new TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
+                                      ),
                                     ),
                                   )
                                 ],
@@ -2353,6 +2481,7 @@ class _HotelsState extends State<Hotels> {
                               child: new Text('3-star hotel',
                                 style: new TextStyle(
                                   color: Colors.grey,
+                                  fontSize: ScreenUtil(allowFontScaling: true).setSp(25)
                                 ),
                                 textAlign: TextAlign.left,
                               ),

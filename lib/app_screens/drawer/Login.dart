@@ -1062,7 +1062,7 @@ class _LoginState extends State<Login> {
 
   void _generateConfirmationCode() {
 
-    String phoneCharacter = _phone.trim().substring(_phone.length - 2, _phone.length - 1);
+    String phoneCharacter = _phone.trim().substring(_phone.length - 2);
 
     var rng = new Random();
 
@@ -1173,6 +1173,8 @@ class _LoginState extends State<Login> {
         else
         {
 //          _authenticate();
+
+          _generateConfirmationCode();
 
           _register();
 

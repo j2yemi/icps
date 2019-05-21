@@ -65,7 +65,7 @@ void main() {
 
 class HomePage extends StatefulWidget {
 
-  Data data; String password; DataTwo data2;
+  Data data; String password; Data data2;
 //  DataTwo data2;
 
 //  final VoidCallback onSignedIn;
@@ -450,7 +450,8 @@ class _HomePageState extends State<HomePage> {
                   child: new ListView(
                   children: <Widget>[
                     new Container(
-                        width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
+                      height: ScreenUtil.getInstance().setHeight(380),
                       child: new DrawerHeader(
                         decoration: new BoxDecoration(
                             color: Color.fromRGBO(0, 0, 0, 0.8)
@@ -482,6 +483,14 @@ class _HomePageState extends State<HomePage> {
                                 new Container(
                                   padding: new EdgeInsets.only(top: 10.0),
                                   child: new Text(user.surname + ' ' + user.firstname,
+                                    style: new TextStyle(
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
+                                new Container(
+                                  padding: new EdgeInsets.only(top: 10.0),
+                                  child: new Text('Conference ID:' + ' ' + user.conferenceId,
                                     style: new TextStyle(
                                         color: Colors.white
                                     ),
@@ -769,6 +778,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   new Container(
                     width: MediaQuery.of(context).size.width,
+                    height: ScreenUtil.getInstance().setHeight(380),
                     child: new DrawerHeader(
                     decoration: new BoxDecoration(
                         color: Color.fromRGBO(0, 0, 0, 0.8)
@@ -800,6 +810,14 @@ class _HomePageState extends State<HomePage> {
                             new Container(
                               padding: new EdgeInsets.only(top: 10.0),
                               child: new Text(user.surname + ' ' + user.firstname,
+                                style: new TextStyle(
+                                    color: Colors.white
+                                ),
+                              ),
+                            ),
+                            new Container(
+                              padding: new EdgeInsets.only(top: 10.0),
+                              child: new Text('Conference ID:' + ' ' + user.conferenceId,
                                 style: new TextStyle(
                                     color: Colors.white
                                 ),

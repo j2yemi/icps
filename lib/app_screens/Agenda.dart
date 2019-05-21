@@ -106,8 +106,8 @@ class _AgendaState extends State<Agenda> {
       body: new PageIndicatorContainer(
         pageView: PageView(
           children: <Widget>[
-            NewAgendaOne(),
-            NewAgendaTwo(),
+            NewAgendaOne(data: widget.data, password: widget.password),
+            NewAgendaTwo(data: widget.data, password: widget.password),
           ],
         ),
         align: IndicatorAlign.bottom, // your indicator align with container
