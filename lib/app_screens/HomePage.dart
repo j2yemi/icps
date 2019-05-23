@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                             leading: Builder(
                                 builder: (context) => Icon(Icons.people)
                             ),
-                            title: new Text('Attendees'),
+                            title: new Text('Join Attendee List'),
                             onTap: () {
                               Navigator.pop(context);
                               Navigator.push(context,
@@ -537,7 +537,7 @@ class _HomePageState extends State<HomePage> {
                                 leading: Builder(
                                     builder: (context) => Icon(Icons.people)
                                 ),
-                                title: new Text('Attendees'),
+                                title: new Text('Join Attendee List'),
                                 onTap: () {
                                   Navigator.pop(context);
                                   Navigator.push(context,
@@ -864,7 +864,7 @@ class _HomePageState extends State<HomePage> {
                             leading: Builder(
                                 builder: (context) => Icon(Icons.people)
                             ),
-                            title: new Text('Attendees'),
+                            title: new Text('Join Attendee List'),
                             onTap: () {
                               Navigator.pop(context);
                               Navigator.push(context,
@@ -1667,7 +1667,6 @@ class _HomePageState extends State<HomePage> {
                 sentToInfo: ss.sentToInfo,
                 userinfoid: ss.userinfoid,
                 usersInfo: ss.usersInfo,
-                messageType: 'R'
             );
             message.add(receiveMessages);
           }
