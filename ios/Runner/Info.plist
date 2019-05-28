@@ -43,7 +43,7 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-    <string>YES</string>
+   
     <key>UIBackgroundModes</key>
     <array>
        <string>fetch</string>
